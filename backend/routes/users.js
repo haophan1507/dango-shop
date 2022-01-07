@@ -7,17 +7,17 @@ const jwt = require('jsonwebtoken');
 router.get(`/`, async (req, res) => {
   const userList = await User.find().select('-passwordHash');
 
-  if (!userList) res.status(500).json({ success: false })
+  if (!userList) return res.status(500).json({ success: false })
 
-  res.send(userList);
+  return res.send(userList);
 });
 
 router.get(`/:id`, async (req, res) => {
   const user = await User.findById(req?.params?.id).select('-passwordHash');
 
-  if (!user) res.status(500).json({ message: 'The user not found' });
+  if (!user) return res.status(500).json({ message: 'The user not found' });
 
-  res.send(user);
+  return res.send(user);
 });
 
 router.post('/', async (req, res) => {
@@ -36,9 +36,9 @@ router.post('/', async (req, res) => {
 
   user = await user.save();
 
-  if (!user) res.status(400).send('The user cannot be created');
+  if (!user) return res.status(400).send('The user cannot be created');
 
-  res.send(user);
+  return res.send(user);
 });
 
 router.put(`/:id`, async (req, res) => {
@@ -68,15 +68,15 @@ router.put(`/:id`, async (req, res) => {
   );
 
   if (!user)
-    res.status(500).json({ message: 'The user cannot update' });
+    return res.status(500).json({ message: 'The user cannot update' });
 
-  res.status(200).send(user);
+  return res.status(200).send(user);
 });
 
 router.post('/login', async (req, res) => {
   const user = await User.findOne({ email: req?.body?.email });
 
-  if (!user) res.status(400).send('The user not found');
+  if (!user) return res.status(400).send('The user not found');
 
   if (user && bcrypt.compareSync(req?.body?.password, user.passwordHash)) {
     const token = jwt.sign(
@@ -85,30 +85,30 @@ router.post('/login', async (req, res) => {
       { expiresIn: '1w' },
     );
 
-    res.status(200).send({ user: user.email, token });
+    return res.status(200).send({ user: user.email, token });
   } else {
-    res.status(400).send('password is wrong');
+    return res.status(400).send('password is wrong');
   };
 });
 
 router.delete('/:id', (req, res) => {
   User.findByIdAndRemove(req.params.id).then(user => {
     if (user) {
-      res.status(200).json({ success: true, message: 'the user is deleted!' });
+      return res.status(200).json({ success: true, message: 'the user is deleted!' });
     } else {
-      res.status(404).json({ success: false, message: "user not found!" });
+      return res.status(404).json({ success: false, message: "user not found!" });
     };
   }).catch(err => {
-    res.status(500).json({ success: false, error: err });
+    return res.status(500).json({ success: false, error: err });
   });
 })
 
 router.get(`/get/count`, async (req, res) => {
   const userCount = await User.countDocuments();
 
-  if (!userCount) res.status(500).json({ success: false });
+  if (!userCount) return res.status(500).json({ success: false });
 
-  res.send({ userCount });
+  return res.send({ userCount });
 });
 
 module.exports = router;

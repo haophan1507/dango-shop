@@ -6,9 +6,9 @@ const router = express.Router();
 router.get(`/`, async (req, res) => {
   const orderList = await Order.find().populate('user', 'name').sort({ 'dateOrdered': -1 });
 
-  if (!orderList) res.status(500).json({ success: false });
+  if (!orderList) return res.status(500).json({ success: false });
 
-  res.send(orderList);
+  return res.send(orderList);
 });
 
 router.get(`/:id`, async (req, res) => {
@@ -20,9 +20,9 @@ router.get(`/:id`, async (req, res) => {
       }
     });
 
-  if (!order) res.status(500).json({ success: false });
+  if (!order) return res.status(500).json({ success: false });
 
-  res.send(order);
+  return res.send(order);
 });
 
 router.post('/', async (req, res) => {
@@ -61,9 +61,9 @@ router.post('/', async (req, res) => {
 
   order = await order.save();
 
-  if (!order) res.status(400).send('The order cannot be created');
+  if (!order) return res.status(400).send('The order cannot be created');
 
-  res.send(order);
+  return res.send(order);
 });
 
 router.put('/:id', async (req, res) => {
@@ -75,9 +75,9 @@ router.put('/:id', async (req, res) => {
     { new: true }
   )
 
-  if (!order) res.status(400).send('the order cannot be update!')
+  if (!order) return res.status(400).send('the order cannot be update!')
 
-  res.send(order);
+  return res.send(order);
 });
 
 router.delete('/:id', (req, res) => {
@@ -100,17 +100,17 @@ router.get('/get/totalsales', async (req, res) => {
     { $group: { _id: null, totalsales: { $sum: '$totalPrice' } } }
   ]);
 
-  if (!totalSales) res.status(400).send('The order sales cannot be generated');
+  if (!totalSales) return res.status(400).send('The order sales cannot be generated');
 
-  res.send({ totalsales: totalSales.pop().totalsales });
+  return res.send({ totalsales: totalSales.pop().totalsales });
 })
 
 router.get(`/get/count`, async (req, res) => {
   const orderCount = await Order.countDocuments();
 
-  if (!orderCount) res.status(500).json({ success: false })
+  if (!orderCount) return res.status(500).json({ success: false })
 
-  res.send({
+  return res.send({
     orderCount: orderCount
   });
 })
@@ -124,9 +124,9 @@ router.get(`/get/userorders/:userid`, async (req, res) => {
     })
     .sort({ 'dateOrdered': -1 });
 
-  if (!userOrderList) res.status(500).json({ success: false });
+  if (!userOrderList) return res.status(500).json({ success: false });
 
-  res.send(userOrderList);
+  return res.send(userOrderList);
 })
 
 module.exports = router;
