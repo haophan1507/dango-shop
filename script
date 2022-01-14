@@ -1,0 +1,4 @@
+npx create-nx-workspace --preset=angular
+nx generate @nrwl/angular:app admin
+nx serve admin
+nx g component pages/home-page --project=dango-shop
