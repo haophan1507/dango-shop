@@ -7,6 +7,7 @@ import { ProductListComponent } from './pages/product-list/product-list.componen
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { UiModule } from '@frontend/ui';
+import { ButtonModule } from 'primeng/button';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent, ProductListComponent, HeaderComponent, FooterComponent],
-  imports: [BrowserModule, RouterModule.forRoot(routes), UiModule],
+  imports: [BrowserModule, RouterModule.forRoot(routes), UiModule, ButtonModule],
   providers: [],
   bootstrap: [AppComponent],
 })
