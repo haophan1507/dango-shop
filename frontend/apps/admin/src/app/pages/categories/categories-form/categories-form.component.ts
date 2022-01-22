@@ -14,11 +14,12 @@ import { timer } from 'rxjs';
 })
 export class CategoriesFormComponent implements OnInit {
   form: FormGroup;
-  isSubmited: boolean = false;
+  isSubmitted: boolean = false;
   editMode: boolean = false;
-  currentCategoryID: string;
+  currentCategoryId: string;
 
-  constructor(private messageService: MessageService,
+  constructor(
+    private messageService: MessageService,
     private formBuilder: FormBuilder,
     private categoriesService: CategoriesService,
     private location: Location,
@@ -36,11 +37,11 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.isSubmited = true
+    this.isSubmitted = true
     if (this.form.invalid) return;
 
     const category: Category = {
-      id: this.currentCategoryID,
+      id: this.currentCategoryId,
       name: this.categoryForm.name.value,
       icon: this.categoryForm.icon.value,
       color: this.categoryForm.color.value,
@@ -79,7 +80,7 @@ export class CategoriesFormComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params.id) {
         this.editMode = true;
-        this.currentCategoryID = params.id;
+        this.currentCategoryId = params.id;
         this.categoriesService.getCategory(params.id).subscribe(category => {
           this.categoryForm.name.setValue(category.name);
           this.categoryForm.icon.setValue(category.icon);

@@ -1,7 +1,7 @@
 <p-toast></p-toast>
 <div class="admin-page">
   <p-card
-    [header]="editMode ? 'Cập nhật danh mục' : 'Thêm mới danh mục'"
+    [header]="editMode ? 'Cập nhật danh mục' : 'Thêm danh mục mới'"
     subheader="Bạn có thể thêm mới hoặc cập nhật danh mục"
   >
     <div class="grid mb-5">
@@ -33,7 +33,7 @@
               <label for="name">Tên</label>
               <input formControlName="name" id="name" type="text" pInputText />
               <small
-                *ngIf="categoryForm.name.invalid && isSubmited"
+                *ngIf="categoryForm.name.invalid && isSubmitted"
                 class="p-error"
                 >Vui lòng nhập tên danh mục
               </small>
@@ -42,7 +42,7 @@
               <label for="icon">Icon</label>
               <input formControlName="icon" id="icon" type="text" pInputText />
               <small
-                *ngIf="categoryForm.icon.invalid && isSubmited"
+                *ngIf="categoryForm.icon.invalid && isSubmitted"
                 class="p-error"
                 >Vui lòng nhập icon
               </small>
