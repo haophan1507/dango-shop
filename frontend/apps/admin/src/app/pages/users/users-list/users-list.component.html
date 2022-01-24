@@ -1,6 +1,6 @@
 <p-toast></p-toast>
 <div class="admin-page">
-  <p-card header="Sản phẩm" subheader="Danh sách sản phẩm">
+  <p-card header="Người dùng" subheader="Danh sách người dùng">
     <div class="grid">
       <div class="col-12">
         <p-toolbar>
@@ -22,7 +22,7 @@
           [rows]="10"
           [showCurrentPageReport]="true"
           [rowsPerPageOptions]="[10, 20, 30]"
-          [value]="products"
+          [value]="users"
           styleClass="p-datatable-gridlines"
           responsiveLayout="scroll"
         >
@@ -31,40 +31,41 @@
               <th pSortableColumn="name">
                 Tên <p-sortIcon field="name"></p-sortIcon>
               </th>
-              <th>Hình ảnh</th>
-              <th pSortableColumn="price">
-                Giá <p-sortIcon field="price"></p-sortIcon>
-              </th>
-              <th pSortableColumn="countInStock">
-                Số lượng <p-sortIcon field="countInStock"></p-sortIcon>
-              </th>
-              <th pSortableColumn="category.name">
-                Danh mục <p-sortIcon field="category.name"></p-sortIcon>
-              </th>
-              <th pSortableColumn="dateCreated">
-                Thời gian <p-sortIcon field="dateCreated"></p-sortIcon>
-              </th>
+              <th>Email</th>
+              <th>Admin</th>
+              <th>Quốc gia</th>
               <th></th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-product>
+          <ng-template pTemplate="body" let-user>
             <tr>
-              <td>{{ product.name }}</td>
-              <td><img [src]="product.image" style="width: 250px" /></td>
-              <td>{{ product.price }}</td>
-              <td>{{ product.countInStock }}</td>
-              <td>{{ product.category.name }}</td>
-              <td>{{ product.dateCreated | date: 'short' }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <p-tag
+                  *ngIf="user.isAdmin"
+                  icon="pi pi-check"
+                  severity="success"
+                  [rounded]="true"
+                ></p-tag>
+                <p-tag
+                  *ngIf="!user.isAdmin"
+                  icon="pi pi-times"
+                  severity="danger"
+                  [rounded]="true"
+                ></p-tag>
+              </td>
+              <td>{{ getCountryName(user.country) }}</td>
               <td>
                 <p-button
                   styleClass="p-button-danger mr-2"
                   icon="pi pi-trash"
-                  (click)="deleteProduct(product.id)"
+                  (click)="deleteUser(user.id)"
                 ></p-button>
                 <p-button
                   styleClass="p-button-success"
                   icon="pi pi-pencil"
-                  (click)="updateProduct(product.id)"
+                  (click)="updateUser(user.id)"
                 ></p-button>
               </td>
             </tr>

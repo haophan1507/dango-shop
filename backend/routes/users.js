@@ -14,7 +14,7 @@ router.get(`/`, fetchUsersCtrl);
 
 router.get(`/:id`, fetchUserCtrl);
 
-router.post('/register', registerUserCtrl);
+router.post('/', registerUserCtrl);
 
 router.put(`/:id`, updateUserCtrl);
 
