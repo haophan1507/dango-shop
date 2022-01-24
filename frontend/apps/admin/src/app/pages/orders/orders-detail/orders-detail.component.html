@@ -1,0 +1,81 @@
+<p-toast></p-toast>
+<div class="admin-page" *ngIf="order">
+  <p-card
+    header="Xem đơn hàng"
+    subheader="Bạn có thể cập nhật trạng thái đơn hàng"
+  >
+    <p-fieldset legend="Chi tiết" styleClass="mb-4" [toggleable]="true">
+      <div class="grid">
+        <div class="col-4">
+          <h4>Id</h4>
+          <p>{{ order.id }}</p>
+        </div>
+        <div class="col-4">
+          <h4>Ngày đặt</h4>
+          <p>{{ order.dateOrdered | date: 'short' }}</p>
+        </div>
+        <div class="col-4">
+          <h4>Trạng thái</h4>
+          <p-dropdown
+            [options]="orderStatuses"
+            optionLabel="name"
+            optionValue="id"
+            (onChange)="onStatusChange($event)"
+            [(ngModel)]="selectedStatus"
+          ></p-dropdown>
+        </div>
+        <div class="col-4">
+          <h4>Tổng tiền</h4>
+          <p>{{ order.totalPrice | currency: 'VND' }}</p>
+        </div>
+      </div>
+    </p-fieldset>
+    <p-fieldset legend="Loại hàng" styleClass="mb-4" [toggleable]="true">
+      <div class="grid mb-5">
+        <div class="col-2 font-bold">Tên</div>
+        <div class="col-2 font-bold">Nhãn hiệu</div>
+        <div class="col-2 font-bold">Danh mục</div>
+        <div class="col-2 font-bold">Giá</div>
+        <div class="col-2 font-bold">Số lượng</div>
+        <div class="col-2 font-bold">Tổng</div>
+      </div>
+      <div class="grid mb-5" *ngFor="let orderItem of order.orderItems">
+        <div class="col-2">{{ orderItem.product.name }}</div>
+        <div class="col-2">{{ orderItem.product.brand }}</div>
+        <div class="col-2">{{ orderItem.product.category.name }}</div>
+        <div class="col-2">{{ orderItem.product.price }}</div>
+        <div class="col-2">{{ orderItem.quantity }}</div>
+        <div class="col-2">
+          {{ orderItem.product.price * orderItem.quantity | currency: 'VND' }}
+        </div>
+      </div>
+      <div class="grid text-lg text-blue-900">
+        <div class="col-2 col-offset-8 font-bold">Tổng tiền</div>
+        <div class="col-2 font-bold">
+          {{ order.totalPrice | currency: 'VND' }}
+        </div>
+      </div>
+    </p-fieldset>
+    <p-fieldset legend="Địa chỉ" styleClass="mb-4" [toggleable]="true">
+      <div class="grid">
+        <div class="col-4">
+          <h4>Địa chỉ</h4>
+          <p>
+            {{ order.shippingAddress1 }}
+            {{ order.shippingAddress2 }}
+            {{ order.zip }} {{ order.city }}
+            {{ order.country }}
+          </p>
+        </div>
+        <div class="col-4">
+          <h4>Thông tin khách hàng</h4>
+          <p>{{ order.user.name }}</p>
+        </div>
+        <div class="col-4">
+          <h4>Thông tin liên hệ</h4>
+          <p>{{ order.phone }}</p>
+        </div>
+      </div>
+    </p-fieldset>
+  </p-card>
+</div>

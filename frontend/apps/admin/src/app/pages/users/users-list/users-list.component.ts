@@ -4,7 +4,7 @@ import { User, UsersService } from '@frontend/users';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'frontend-users-list',
+  selector: 'admin-users-list',
   templateUrl: './users-list.component.html',
   styles: [
   ]

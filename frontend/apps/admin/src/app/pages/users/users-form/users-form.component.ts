@@ -8,7 +8,7 @@ import { timer } from 'rxjs';
 import * as countriesLib from 'i18n-iso-countries';
 
 @Component({
-  selector: 'frontend-users-form',
+  selector: 'admin-users-form',
   templateUrl: './users-form.component.html',
   styles: [
   ]
