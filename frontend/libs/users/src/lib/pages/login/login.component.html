@@ -1,0 +1,74 @@
+<div class="login-register">
+  <div class="login-register-panel">
+    <div class="grid">
+      <div class="col-6">
+        <img src="assets/images/login-photo.png" alt="" />
+      </div>
+      <div class="col-6 p-6">
+        <h3>Xin chào!</h3>
+        <h2>Trang đăng ký</h2>
+        <form [formGroup]="loginFormGroup">
+          <div class="grid mt-6">
+            <div class="col-12">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"
+                  ><i class="pi pi-user"></i
+                ></span>
+                <input
+                  type="text"
+                  formControlName="email"
+                  pInputText
+                  placeholder="Email"
+                />
+              </div>
+              <small
+                *ngIf="loginForm.email.invalid && isSubmitted"
+                class="p-error"
+                ><span *ngIf="loginForm.email.errors.required"
+                  >Vui lòng nhập Email</span
+                >
+                <span *ngIf="loginForm.email.errors.email"
+                  >Email không đúng định dạng</span
+                >
+              </small>
+            </div>
+            <div class="col-12">
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"
+                  ><i class="pi pi-lock"></i
+                ></span>
+                <input
+                  type="password"
+                  formControlName="password"
+                  pInputText
+                  placeholder="Mật khẩu"
+                />
+              </div>
+              <small
+                *ngIf="loginForm.password.invalid && isSubmitted"
+                class="p-error"
+              >
+                <span *ngIf="loginForm.password.errors.required"
+                  >Vui lòng nhập mật khẩu</span
+                >
+                <span *ngIf="loginForm.password.errors.minlength"
+                  >Mật khẩu phải lớn hơn 6 ký tự</span
+                >
+              </small>
+            </div>
+            <div class="col-12">
+              <p-button
+                label="Đăng ký"
+                styleClass="full-btn"
+                (onClick)="onSubmit()"
+              ></p-button>
+            </div>
+            <div class="col-12" *ngIf="isSubmitted && authError">
+              <small class="p-error">{{ authMessage }}</small>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,7 @@
       <li routerLink="/users" routerLinkActive="router-link-active">
         <a><i class="pi pi-users"></i>Người dùng</a>
       </li>
-      <li>
+      <li (click)="logoutUser()">
         <a class="logout"><i class="pi pi-sign-out"></i>Đăng xuất</a>
       </li>
     </ul>
