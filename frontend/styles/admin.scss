@@ -11,8 +11,12 @@
 @import '~primeflex/primeflex.scss';
 @import './base/configuration.scss';
 
+//Responsive
+@import './base/responsive.scss';
+
 //Shared
 @import './apps/admin/shell.scss';
+@import './apps/admin/dashboard.scss';
 
 //libs
 @import './libs/ui/ui.scss';

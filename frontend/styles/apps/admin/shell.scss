@@ -7,6 +7,13 @@
   &-main {
     width: calc(100% - 200px);
     margin-left: 200px;
+    @include responsive_1024 {
+      width: calc(100% - 150px);
+      margin-left: 150px;
+    }
+  }
+  &-responsive-menu {
+    display: none;
   }
   &-sidebar {
     position: fixed;
@@ -14,6 +21,9 @@
     background-color: var(--blue-900);
     height: 100%;
     top: 0;
+    @include responsive_1024 {
+      width: 150px;
+    }
 
     .logo {
       padding: 20px;
@@ -56,6 +66,61 @@
           &.router-link-active {
             background-color: var(--blue-700);
           }
+        }
+      }
+    }
+  }
+
+  @include responsive_768 {
+    &-main {
+      width: auto;
+      margin-left: auto;
+      height: calc(100% - 50px);
+      margin-top: 50px;
+    }
+    &-sidebar {
+      display: none;
+    }
+    &-responsive-menu {
+      display: block;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+
+      & span {
+        font-size: 1rem;
+        color: var(--surface-a) !important;
+      }
+
+      & a:focus {
+        box-shadow: none !important;
+      }
+
+      & .p-panelmenu {
+        .p-panelmenu-content {
+          padding: 0;
+          border: 0;
+        }
+        .p-panelmenu-header > a {
+          border: 0;
+          background-color: var(--blue-900);
+          color: var(--surface-a);
+        }
+        .p-panelmenu-header:not(.p-highlight):not(.p-disabled) > a:hover,
+        .p-panelmenu-header.p-highlight:not(.p-disabled) > a:hover,
+        .p-panelmenu-content .p-menuitem .p-menuitem-link {
+          background-color: var(--blue-700);
+          color: var(--surface-a);
+        }
+        .p-panelmenu-content
+          .p-menuitem
+          .p-menuitem-link:not(.p-disabled):hover {
+          background-color: var(--blue-500);
+        }
+        .p-panelmenu-panel:last-child.p-panelmenu-header:not(.p-highlight) > a,
+        .p-panelmenu-panel:first-child .p-panelmenu-header > a {
+          border-radius: 0;
         }
       }
     }

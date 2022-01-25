@@ -10,6 +10,9 @@
 @import '~primeflex/primeflex.scss';
 @import './base/configuration.scss';
 
+//Responsive
+@import './base/responsive.scss';
+
 //pages
 @import './apps/shop/pages/home-page.scss';
 @import './apps/shop/pages/products-list-page.scss';

@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Product, ProductsService } from '@frontend/products';
 import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import { Subject, takeUntil, timer } from 'rxjs';
 
 @Component({
   selector: 'admin-products-form',
@@ -12,13 +12,14 @@ import { timer } from 'rxjs';
   styles: [
   ]
 })
-export class ProductsFormComponent implements OnInit {
+export class ProductsFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   categories = [];
   isSubmitted: boolean = false;
   editMode: boolean = false;
   imageDisplay: string | ArrayBuffer;
   currentProductId: string;
+  endsubs$: Subject<void> = new Subject();
 
   constructor(
     private messageService: MessageService,
@@ -33,6 +34,11 @@ export class ProductsFormComponent implements OnInit {
     this._initForm();
     this._getCategories();
     this._checkEditMode();
+  }
+
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
   }
 
   onSubmit() {
@@ -53,7 +59,7 @@ export class ProductsFormComponent implements OnInit {
   }
 
   private _updateProduct(productData: FormData) {
-    this.productsService.updateProduct(productData, this.currentProductId).subscribe(() => {
+    this.productsService.updateProduct(productData, this.currentProductId).pipe(takeUntil(this.endsubs$)).subscribe(() => {
       this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Sản phẩm đã được cập nhật' });
       timer(1000).toPromise().then(() => {
         this.location.back();
@@ -64,7 +70,7 @@ export class ProductsFormComponent implements OnInit {
   }
 
   private _addProduct(productData: FormData) {
-    this.productsService.createProduct(productData).subscribe(() => {
+    this.productsService.createProduct(productData).pipe(takeUntil(this.endsubs$)).subscribe(() => {
       this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Sản phẩm mới đã được tạo' });
       timer(1000).toPromise().then(() => {
         this.location.back();
@@ -88,11 +94,11 @@ export class ProductsFormComponent implements OnInit {
   }
 
   _checkEditMode() {
-    this.route.params.subscribe(params => {
+    this.route.params.pipe(takeUntil(this.endsubs$)).subscribe(params => {
       if (params.id) {
         this.editMode = true;
         this.currentProductId = params.id;
-        this.productsService.getProduct(params.id).subscribe(product => {
+        this.productsService.getProduct(params.id).pipe(takeUntil(this.endsubs$)).subscribe(product => {
           this.productForm.name.setValue(product.name);
           this.productForm.category.setValue(product.category.id);
           this.productForm.brand.setValue(product.brand);
@@ -124,7 +130,7 @@ export class ProductsFormComponent implements OnInit {
   }
 
   private _getCategories() {
-    this.categoriesService.getCategories().subscribe(categories => {
+    this.categoriesService.getCategories().pipe(takeUntil(this.endsubs$)).subscribe(categories => {
       this.categories = categories;
     })
   }

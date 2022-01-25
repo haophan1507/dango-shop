@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category } from '@frontend/products';
 import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import { Subject, takeUntil, timer } from 'rxjs';
 
 @Component({
   selector: 'admin-categories-form',
@@ -12,11 +12,12 @@ import { timer } from 'rxjs';
   styles: [
   ]
 })
-export class CategoriesFormComponent implements OnInit {
+export class CategoriesFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   isSubmitted: boolean = false;
   editMode: boolean = false;
   currentCategoryId: string;
+  endsubs$: Subject<void> = new Subject();
 
   constructor(
     private messageService: MessageService,
@@ -34,6 +35,11 @@ export class CategoriesFormComponent implements OnInit {
     });
 
     this._checkEditMode();
+  }
+
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
   }
 
   onSubmit() {
@@ -55,29 +61,35 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _updateCategory(category: Category) {
-    this.categoriesService.updateCategory(category).subscribe(() => {
-      this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Danh mục đã được cập nhật' });
-      timer(1000).toPromise().then(() => {
-        this.location.back();
-      })
-    }, () => {
-      this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
-    });
+    this.categoriesService
+      .updateCategory(category)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe(() => {
+        this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Danh mục đã được cập nhật' });
+        timer(1000).toPromise().then(() => {
+          this.location.back();
+        })
+      }, () => {
+        this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
+      });
   }
 
   private _addCategory(category: Category) {
-    this.categoriesService.createCategory(category).subscribe(() => {
-      this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Danh mục mới đã được tạo' });
-      timer(1000).toPromise().then(() => {
-        this.location.back();
-      })
-    }, () => {
-      this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
-    });
+    this.categoriesService
+      .createCategory(category)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe(() => {
+        this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Danh mục mới đã được tạo' });
+        timer(1000).toPromise().then(() => {
+          this.location.back();
+        })
+      }, () => {
+        this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
+      });
   }
 
   private _checkEditMode() {
-    this.route.params.subscribe(params => {
+    this.route.params.pipe(takeUntil(this.endsubs$)).subscribe(params => {
       if (params.id) {
         this.editMode = true;
         this.currentCategoryId = params.id;

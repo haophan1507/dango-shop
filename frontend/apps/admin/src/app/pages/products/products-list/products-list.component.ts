@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from '@frontend/products';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'admin-products-list',
@@ -9,8 +10,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styles: [
   ]
 })
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent implements OnInit, OnDestroy {
   products = [];
+  endsubs$: Subject<void> = new Subject();
 
   constructor(
     private productsService: ProductsService,
@@ -23,13 +25,18 @@ export class ProductsListComponent implements OnInit {
     this._getProducts();
   }
 
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
+  }
+
   deleteProduct(productId: string) {
     this.confirmationService.confirm({
       message: 'Bạn có muốn xóa không?',
       header: 'Xóa',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.productsService.deleteProduct(productId).subscribe(() => {
+        this.productsService.deleteProduct(productId).pipe(takeUntil(this.endsubs$)).subscribe(() => {
           this._getProducts();
           this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Danh mục đã bị xóa' });
         }, () => {
@@ -44,7 +51,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   private _getProducts() {
-    this.productsService.getProducts().subscribe(products => {
+    this.productsService.getProducts().pipe(takeUntil(this.endsubs$)).subscribe(products => {
       this.products = products;
     })
   }

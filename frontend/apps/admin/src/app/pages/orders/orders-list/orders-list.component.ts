@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Order, OrdersService } from '@frontend/orders';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 import { ORDER_STATUS } from '../order.constants';
 
 @Component({
@@ -10,9 +11,10 @@ import { ORDER_STATUS } from '../order.constants';
   styles: []
 })
 
-export class OrdersListComponent implements OnInit {
+export class OrdersListComponent implements OnInit, OnDestroy {
   orders: Order[] = [];
   orderStatus = ORDER_STATUS;
+  endsubs$: Subject<void> = new Subject();
 
   constructor(
     private ordersService: OrdersService,
@@ -25,18 +27,26 @@ export class OrdersListComponent implements OnInit {
     this._getOrders();
   }
 
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
+  }
+
   deleteOrder(orderId: string) {
     this.confirmationService.confirm({
       message: 'Bạn có muốn xóa không?',
       header: 'Xóa',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.ordersService.deleteOrder(orderId).subscribe(() => {
-          this._getOrders();
-          this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Đơn hàng đã bị xóa' });
-        }, () => {
-          this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
-        });
+        this.ordersService
+          .deleteOrder(orderId)
+          .pipe(takeUntil(this.endsubs$))
+          .subscribe(() => {
+            this._getOrders();
+            this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Đơn hàng đã bị xóa' });
+          }, () => {
+            this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
+          });
       }
     });
   }
@@ -46,7 +56,7 @@ export class OrdersListComponent implements OnInit {
   }
 
   private _getOrders() {
-    this.ordersService.getOrders().subscribe(orders => this.orders = orders);
+    this.ordersService.getOrders().pipe(takeUntil(this.endsubs$)).subscribe(orders => this.orders = orders);
   }
 
 }

@@ -1,0 +1,58 @@
+.d-item {
+  display: flex;
+  text-align: center;
+  color: var(--surface-a);
+  justify-content: space-between;
+
+  .pi {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .name {
+    font-size: 1rem;
+  }
+
+  .number {
+    max-width: 50%;
+    margin-top: 50px;
+    font-size: 2em;
+    white-space: nowrap !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @include responsive_992 {
+    .pi {
+      font-size: 2rem;
+    }
+    .number {
+      font-size: 2em;
+    }
+  }
+}
+
+.d-orders {
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
+}
+
+.d-products {
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+}
+
+.d-users {
+  background-color: #00dbde;
+  background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+}
+
+.d-totalsales {
+  background-color: #ffe53b;
+  background-image: linear-gradient(147deg, #ffe53b 0%, #ff2525 74%);
+}

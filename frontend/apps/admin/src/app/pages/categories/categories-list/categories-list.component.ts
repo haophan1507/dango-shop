@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriesService, Category } from '@frontend/products';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'admin-categories-list',
@@ -9,8 +10,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
   styles: [
   ]
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent implements OnInit, OnDestroy {
   categories: Category[] = [];
+  endsubs$: Subject<void> = new Subject;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -23,18 +25,26 @@ export class CategoriesListComponent implements OnInit {
     this._getCategories();
   }
 
+  ngOnDestroy(): void {
+    this.endsubs$.next();
+    this.endsubs$.complete();
+  }
+
   deleteCategory(categoryId: string) {
     this.confirmationService.confirm({
       message: 'Bạn có muốn xóa không?',
       header: 'Xóa',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.categoriesService.deleteCategory(categoryId).subscribe(() => {
-          this._getCategories();
-          this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Danh mục đã bị xóa' });
-        }, () => {
-          this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
-        });
+        this.categoriesService
+          .deleteCategory(categoryId)
+          .pipe(takeUntil(this.endsubs$))
+          .subscribe(() => {
+            this._getCategories();
+            this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Danh mục đã bị xóa' });
+          }, () => {
+            this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
+          });
       }
     });
   }
@@ -44,7 +54,7 @@ export class CategoriesListComponent implements OnInit {
   }
 
   private _getCategories() {
-    this.categoriesService.getCategories().subscribe(cats => this.categories = cats);
+    this.categoriesService.getCategories().pipe(takeUntil(this.endsubs$)).subscribe(cats => this.categories = cats);
   }
 
 }

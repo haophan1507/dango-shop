@@ -148,7 +148,7 @@ const fetchCountProductCtrl = expressAsyncHandler(
       if (!productCount) return res.status(500).json({ success: false })
 
       return res.send({
-        count: productCount
+        productCount: productCount
       });
     } catch (err) {
       return res.status(500).json({ success: false, error: err.message });
