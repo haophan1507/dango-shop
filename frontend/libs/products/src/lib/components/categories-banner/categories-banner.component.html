@@ -1,0 +1,40 @@
+<div class="categories-banner">
+  <h3>Danh mục sản phẩm</h3>
+  <div class="grid">
+    <p-carousel
+      class="custom-carousel"
+      [value]="categories"
+      [numVisible]="5"
+      [numScroll]="1"
+      [circular]="true"
+      [autoplayInterval]="3000"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template let-category pTemplate="item">
+        <div
+          class="category"
+          [routerLink]="'/products/category' + category.id"
+          [ngStyle]="{ backgroundColor: category.color }"
+        >
+          <div class="category-icon">
+            <i class="fa fa-{{ category.icon }}"></i>
+          </div>
+          <div class="category-name">{{ category.name }}</div>
+        </div>
+      </ng-template>
+    </p-carousel>
+    <!-- 
+    <div class="col-2" *ngFor="let category of categories">
+      <div
+        class="category"
+        [routerLink]="'/products/category' + category.id"
+        [ngStyle]="{ backgroundColor: category.color }"
+      >
+        <div class="category-icon">
+          <i class="fa fa-{{ category.icon }}"></i>
+        </div>
+        <div class="category-name">{{ category.name }}</div>
+      </div>
+    </div> -->
+  </div>
+</div>

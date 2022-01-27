@@ -18,7 +18,7 @@
   &-sidebar {
     position: fixed;
     width: 200px;
-    background-color: var(--blue-900);
+    background-color: var(--blue-800);
     height: 100%;
     top: 0;
     @include responsive_1024 {
@@ -59,7 +59,7 @@
             }
 
             &.logout {
-              color: var(--blue-300);
+              color: var(--blue-200);
             }
           }
 
