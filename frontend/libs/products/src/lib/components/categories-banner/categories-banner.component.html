@@ -3,6 +3,7 @@
   <div class="grid">
     <p-carousel
       class="custom-carousel"
+      *ngIf="categories && categories.length > 0"
       [value]="categories"
       [numVisible]="5"
       [numScroll]="1"
@@ -13,7 +14,7 @@
       <ng-template let-category pTemplate="item">
         <div
           class="category"
-          [routerLink]="'/products/category' + category.id"
+          [routerLink]="'/category/' + category.id"
           [ngStyle]="{ backgroundColor: category.color }"
         >
           <div class="category-icon">

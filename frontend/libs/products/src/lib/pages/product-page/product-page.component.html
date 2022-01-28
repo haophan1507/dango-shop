@@ -1,0 +1,66 @@
+<div class="product-page" *ngIf="product">
+  <div class="grid">
+    <div class="col-6">
+      <ui-gallery [images]="product.image"></ui-gallery>
+    </div>
+    <div class="col-6 product">
+      <h2 class="product-name">{{ product.name }}</h2>
+      <p class="product-desc">{{ product.description }}</p>
+      <div class="product-rating">
+        <p-rating
+          [(ngModel)]="product.rating"
+          [cancel]="false"
+          [disabled]="true"
+        ></p-rating>
+      </div>
+      <div class="product-price">
+        {{ product.price | currency: 'VND' }}
+        <!-- <span class="price-before">{{
+          product.price + 18 | currency: 'VND'
+        }}</span> -->
+      </div>
+      <div class="product-quantity">
+        <div class="field col-12 md:col-3 p-0">
+          <label for="quantity">Số lượng</label>
+          <p-inputNumber
+            [(ngModel)]="quantity"
+            [showButtons]="true"
+            inputId="quantity"
+            mode="decimal"
+            [min]="0"
+            [max]="product.countInStock"
+          >
+          </p-inputNumber>
+          <p-tag
+            severity="warning"
+            [rounded]="true"
+            value="Còn {{ product.countInStock }} sản phẩm"
+          ></p-tag>
+        </div>
+      </div>
+      <div class="product-actions">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Mua ngay"
+          class="p-button-rounded mr-2"
+        ></button>
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Thêm vào giỏ hàng"
+          class="p-button-rounded"
+          (onClick)="addProductToCart()"
+        ></button>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <h2 class="col-3">MÔ TẢ SẢN PHẨM</h2>
+    <div class="col-12 product-rich-desc">
+      <div [innerHTML]="product.richDescription"></div>
+    </div>
+  </div>
+</div>

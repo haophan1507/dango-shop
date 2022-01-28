@@ -28,14 +28,17 @@ export class CategoriesBannerComponent implements OnInit, OnDestroy {
       {
         breakpoint: '1024px',
         numVisible: 4,
+        numScroll: 1
       },
       {
         breakpoint: '768px',
         numVisible: 3,
+        numScroll: 1
       },
       {
         breakpoint: '560px',
         numVisible: 2,
+        numScroll: 1
       }
     ];
   }
