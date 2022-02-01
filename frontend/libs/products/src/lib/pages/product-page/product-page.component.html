@@ -27,7 +27,7 @@
             [showButtons]="true"
             inputId="quantity"
             mode="decimal"
-            [min]="0"
+            [min]="1"
             [max]="product.countInStock"
           >
           </p-inputNumber>
@@ -52,7 +52,7 @@
           type="button"
           label="Thêm vào giỏ hàng"
           class="p-button-rounded"
-          (onClick)="addProductToCart()"
+          (click)="addProductToCart()"
         ></button>
       </div>
     </div>

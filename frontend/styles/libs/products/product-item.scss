@@ -14,12 +14,13 @@
   .image {
     cursor: pointer;
     width: 60%;
-    height: 150px;
+    border-radius: 5px;
+    max-height: 200px;
     margin-top: -85px;
   }
 
   .name {
-    margin: 10px 0;
+    margin: 10px;
   }
 
   .price {

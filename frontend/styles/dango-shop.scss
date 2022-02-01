@@ -15,17 +15,18 @@
 //Responsive
 @import './base/responsive.scss';
 
-//pages
-@import './apps/shop/pages/home-page.scss';
-@import './apps/shop/pages/products-list-page.scss';
-
 //shared
 @import './apps/shop/shared/header.scss';
 @import './apps/shop/shared/footer.scss';
 @import './apps/shop/shared/nav.scss';
 
+//pages
+@import './apps/shop/pages/home-page.scss';
+@import './apps/shop/pages/products-list-page.scss';
+
 //libs
 @import './libs/products/products.scss';
+@import './libs/orders/orders.scss';
 @import './libs/ui/ui.scss';
 
 .container {

@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+import { OrdersModule } from '@frontend/orders';
 import { ProductsModule } from '@frontend/products';
 import { UiModule } from 'libs/ui/src';
 import { ButtonModule } from 'primeng/button';
@@ -10,6 +11,10 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { NavComponent } from './shared/nav/nav.component';
+import { ToastModule } from 'primeng/toast';
+import { DangoShopMessagesComponent } from './shared/messages/dango-shop-messages/dango-shop-messages.component';
+import { MessageService } from 'primeng/api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   {
@@ -24,17 +29,21 @@ const routes: Routes = [
     HomePageComponent,
     HeaderComponent,
     FooterComponent,
-    NavComponent
+    NavComponent,
+    DangoShopMessagesComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
     ButtonModule,
     ProductsModule,
-    UiModule
+    UiModule,
+    OrdersModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

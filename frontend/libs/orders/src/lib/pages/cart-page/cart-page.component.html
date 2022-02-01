@@ -1,0 +1,59 @@
+<div class="cart-page">
+  <div class="grid">
+    <div class="col-8">
+      <div>
+        <p-button
+          label="Tiếp tục mua sắm"
+          icon="pi pi-arrow-left"
+          (onClick)="backtoShop()"
+        ></p-button>
+      </div>
+      <div>
+        <h4>Giỏ hàng: {{ cartCount }} sản phẩm</h4>
+      </div>
+      <div class="cart-shipping mb-5">Giao hàng sau khi thanh toán</div>
+      <div class="cart-item mb-5" *ngFor="let cartItem of cartItemsDetailed">
+        <div class="grid p-fluid">
+          <div class="col-2 cart-item-image">
+            <img [src]="cartItem.product.image" [alt]="cartItem.product.name" />
+          </div>
+          <div class="col-7">
+            <div class="cart-item-name">{{ cartItem.product.name }}</div>
+            <div class="cart-item-price">
+              {{ cartItem.product.price | currency: 'VND' }}
+            </div>
+            <div class="cart-item-remove">
+              <p-button
+                icon="pi pi-trash"
+                (onClick)="deleteCartItem(cartItem.product.id)"
+              ></p-button>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="field cart-item-quantity">
+              <p-inputNumber
+                [(ngModel)]="cartItem.quantity"
+                [showButtons]="true"
+                [inputId]="cartItem.product.id"
+                mode="decimal"
+                [min]="1"
+                [max]="cartItem.product.countInStock"
+                (onInput)="updateCartItemQuantity($event, cartItem)"
+              >
+              </p-inputNumber>
+            </div>
+            <div class="cart-item-subtotal">
+              Tổng:
+              <span class="cart-item-subtotal-value">{{
+                cartItem.product.price * cartItem.quantity | currency: 'VND'
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <orders-order-summary></orders-order-summary>
+    </div>
+  </div>
+</div>
