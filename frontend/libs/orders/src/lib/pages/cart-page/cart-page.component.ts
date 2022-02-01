@@ -4,8 +4,6 @@ import { Subject, take, takeUntil } from 'rxjs';
 import { CartItemDetailed } from '../../models/cart';
 import { CartService } from '../../services/cart.service';
 import { OrdersService } from '../../services/orders.service';
-import { of, timer } from 'rxjs';
-import { debounce } from 'rxjs/operators'
 
 @Component({
   selector: 'orders-cart-page',

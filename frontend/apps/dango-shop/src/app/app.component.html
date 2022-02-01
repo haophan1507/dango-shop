@@ -1,6 +1,6 @@
-<div class="container">
-  <dango-shop-header></dango-shop-header>
+<div [class]="isLogin ? '' : 'container'">
+  <dango-shop-header *ngIf="!isLogin"></dango-shop-header>
   <router-outlet></router-outlet>
-  <dango-shop-footer></dango-shop-footer>
-  <dango-shop-messages></dango-shop-messages>
+  <dango-shop-footer *ngIf="!isLogin"></dango-shop-footer>
+  <dango-shop-messages *ngIf="!isLogin"></dango-shop-messages>
 </div>

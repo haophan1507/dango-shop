@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from '@frontend/users';
+import { Subject, take, takeUntil } from 'rxjs';
 import { Cart } from '../../models/cart';
 import { Order } from '../../models/order';
 import { OrderItem } from '../../models/order-item';
@@ -14,12 +15,13 @@ import { OrdersService } from '../../services/orders.service';
   styles: [
   ]
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit, OnDestroy {
   checkoutFormGroup: FormGroup;
   countries = [];
   orderItems: OrderItem[] = [];
-  userId = '61ed73ad683335f9d0bafb90';
+  userId: string;
   isSubmitted = false;
+  endsubs$: Subject<void> = new Subject();
 
   constructor(
     private router: Router,
@@ -31,8 +33,14 @@ export class CheckoutPageComponent implements OnInit {
 
   ngOnInit(): void {
     this._initCheckoutForm();
+    this._autoFillUserData();
     this._getCartItems();
     this._getCountries();
+  }
+
+  ngOnDestroy() {
+    this.endsubs$.next();
+    this.endsubs$.complete();
   }
 
   placeOrder() {
@@ -59,10 +67,30 @@ export class CheckoutPageComponent implements OnInit {
         this.cartService.emptyCart();
         this.router.navigate(['/success']);
       },
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       () => {
 
       }
     );
+  }
+
+  private _autoFillUserData() {
+    this.usersService
+      .observeCurrentUser()
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe((user) => {
+        if (user) {
+          this.userId = user.id;
+          this.checkoutForm.name.setValue(user.name);
+          this.checkoutForm.email.setValue(user.email);
+          this.checkoutForm.phone.setValue(user.phone);
+          this.checkoutForm.city.setValue(user.city);
+          this.checkoutForm.street.setValue(user.street);
+          this.checkoutForm.country.setValue(user.country);
+          this.checkoutForm.zip.setValue(user.zip);
+          this.checkoutForm.apartment.setValue(user.apartment);
+        }
+      });
   }
 
   private _getCartItems() {

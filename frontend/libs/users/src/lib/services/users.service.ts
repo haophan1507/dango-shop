@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { environment } from '@env/environment';
 import * as countriesLib from 'i18n-iso-countries';
+import { UsersFacade } from '../state/users.facade';
 declare const require;
 
 @Injectable({
@@ -12,7 +13,10 @@ declare const require;
 export class UsersService {
   apiURLUsers = environment.apiUrl + 'users';
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private usersFacade: UsersFacade
+  ) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     countriesLib.registerLocale(require('i18n-iso-countries/langs/vi.json'));
   }
@@ -54,5 +58,17 @@ export class UsersService {
 
   getCountry(countryKey: string): string {
     return countriesLib.getName(countryKey, 'vi');
+  }
+
+  initAppSession() {
+    this.usersFacade.buildUserSession();
+  }
+
+  observeCurrentUser() {
+    return this.usersFacade.currentUser$;
+  }
+
+  isCurrentUserAuth() {
+    return this.usersFacade.isAuthenticated$;
   }
 }
