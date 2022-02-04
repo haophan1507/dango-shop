@@ -53,7 +53,7 @@ export class ResponsiveMenuComponent implements OnInit {
           {
             label: 'Đăng xuất',
             icon: 'pi pi-fw pi-sign-out',
-            command: (click) => this.authService.logout()
+            command: () => this.authService.logout()
           }
         ]
       }

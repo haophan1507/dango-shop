@@ -9,7 +9,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/admin",
             "index": "apps/admin/src/index.html",
@@ -17,14 +19,19 @@
             "polyfills": "apps/admin/src/polyfills.ts",
             "tsConfig": "apps/admin/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/admin/src/favicon.ico", "apps/admin/src/assets"],
+            "assets": [
+              "apps/admin/src/favicon.ico",
+              "apps/admin/src/assets"
+            ],
             "styles": [
               "apps/admin/src/styles.scss",
               "node_modules/quill/dist/quill.core.css",
               "node_modules/quill/dist/quill.snow.css",
               "node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": ["node_modules/quill/dist/quill.js"]
+            "scripts": [
+              "node_modules/quill/dist/quill.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -88,7 +95,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/admin"],
+          "outputs": [
+            "coverage/apps/admin"
+          ],
           "options": {
             "jestConfig": "apps/admin/jest.config.js",
             "passWithNoTests": true
@@ -116,14 +125,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/admin-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/admin-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["admin"]
+      "implicitDependencies": [
+        "admin"
+      ]
     },
     "dango-shop": {
       "projectType": "application",
@@ -133,7 +148,9 @@
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
+          "outputs": [
+            "{options.outputPath}"
+          ],
           "options": {
             "outputPath": "dist/apps/dango-shop",
             "index": "apps/dango-shop/src/index.html",
@@ -213,7 +230,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/dango-shop"],
+          "outputs": [
+            "coverage/apps/dango-shop"
+          ],
           "options": {
             "jestConfig": "apps/dango-shop/jest.config.js",
             "passWithNoTests": true
@@ -241,14 +260,20 @@
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
+          "outputs": [
+            "{options.outputFile}"
+          ],
           "options": {
-            "lintFilePatterns": ["apps/dango-shop-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "apps/dango-shop-e2e/**/*.{js,ts}"
+            ]
           }
         }
       },
       "tags": [],
-      "implicitDependencies": ["dango-shop"]
+      "implicitDependencies": [
+        "dango-shop"
+      ]
     },
     "orders": {
       "projectType": "library",
@@ -258,7 +283,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/orders"],
+          "outputs": [
+            "dist/libs/orders"
+          ],
           "options": {
             "project": "libs/orders/ng-package.json"
           },
@@ -274,7 +301,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/orders"],
+          "outputs": [
+            "coverage/libs/orders"
+          ],
           "options": {
             "jestConfig": "libs/orders/jest.config.js",
             "passWithNoTests": true
@@ -300,7 +329,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/products"],
+          "outputs": [
+            "coverage/libs/products"
+          ],
           "options": {
             "jestConfig": "libs/products/jest.config.js",
             "passWithNoTests": true
@@ -326,7 +357,9 @@
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/ui"],
+          "outputs": [
+            "coverage/libs/ui"
+          ],
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "passWithNoTests": true
@@ -335,7 +368,10 @@
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/ui/src/**/*.ts", "libs/ui/src/**/*.html"]
+            "lintFilePatterns": [
+              "libs/ui/src/**/*.ts",
+              "libs/ui/src/**/*.html"
+            ]
           }
         }
       },
@@ -349,7 +385,9 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:ng-packagr-lite",
-          "outputs": ["dist/libs/users"],
+          "outputs": [
+            "dist/libs/users"
+          ],
           "options": {
             "project": "libs/users/ng-package.json"
           },
@@ -365,7 +403,9 @@
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/users"],
+          "outputs": [
+            "coverage/libs/users"
+          ],
           "options": {
             "jestConfig": "libs/users/jest.config.js",
             "passWithNoTests": true

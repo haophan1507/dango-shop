@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../services/cart.service';
+import { OrdersService } from '../../services/orders.service';
 
 @Component({
   selector: 'orders-thank-you',
@@ -8,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThankYouComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private ordersService: OrdersService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
+    const orderData = this.ordersService.getCachedOrderData();
+    this.ordersService.createOrder(orderData).subscribe(() => {
+      this.cartService.emptyCart();
+      this.ordersService.removeCachedOrderData();
+    })
   }
 
 }

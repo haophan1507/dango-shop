@@ -4,7 +4,7 @@ import { UsersService } from '@frontend/users';
 import { filter } from 'rxjs';
 
 @Component({
-  selector: 'frontend-root',
+  selector: 'dango-shop-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   ) {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
+    ).subscribe(() => {
       this.router.url.includes('login') ? (this.isLogin = true) : (this.isLogin = false);
     });
   }
@@ -24,6 +24,4 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.usersService.initAppSession();
   }
-
-  title = 'dango-shop';
 }

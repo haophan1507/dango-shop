@@ -14,8 +14,8 @@ import { Subject, takeUntil, timer } from 'rxjs';
 })
 export class CategoriesFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  isSubmitted: boolean = false;
-  editMode: boolean = false;
+  isSubmitted = false;
+  editMode = false;
   currentCategoryId: string;
   endsubs$: Subject<void> = new Subject();
 

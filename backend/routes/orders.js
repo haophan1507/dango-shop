@@ -8,7 +8,8 @@ const {
   deleteOrderCtrl,
   fetchTotalSalesCtrl,
   fetchCountOrderCtrl,
-  fetchUserOrderCtrl
+  fetchUserOrderCtrl,
+  createCheckoutCtrl
 } = require('../controllers/orders');
 
 router.get(`/`, fetchOrdersCtrl);
@@ -16,6 +17,8 @@ router.get(`/`, fetchOrdersCtrl);
 router.get(`/:id`, fetchOrderCtrl);
 
 router.post('/', createOrderCtrl);
+
+router.post('/create-checkout-session', createCheckoutCtrl);
 
 router.put('/:id', updateOrderCtrl);
 

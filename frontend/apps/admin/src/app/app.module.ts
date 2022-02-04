@@ -40,6 +40,7 @@ import { UsersListComponent } from './pages/users/users-list/users-list.componen
 import { ResponsiveMenuComponent } from './shared/responsive-menu/responsive-menu.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { NgxStripeModule } from 'ngx-stripe';
 
 const UX_MODULE = [
   ButtonModule,
@@ -75,7 +76,7 @@ const UX_MODULE = [
     UsersFormComponent,
     OrdersListComponent,
     OrdersDetailComponent,
-    ResponsiveMenuComponent,
+    ResponsiveMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +88,7 @@ const UX_MODULE = [
     ReactiveFormsModule,
     UsersModule,
     AppRoutingModule,
+    NgxStripeModule.forRoot('pk_test_51KOgxzFqZk9ebbKnL5lQw4tyL315L2T5O9uSfgrxIlMCLoLia4IVTvI8tfU1D4HAUyLLen9FuBSI06nJ5RYZD4UN00AWpVcAIi'),
     ...UX_MODULE
   ],
   providers: [
@@ -95,6 +97,6 @@ const UX_MODULE = [
     ConfirmationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

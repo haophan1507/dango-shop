@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { CategoriesService, Product, ProductsService } from '@frontend/products';
+import { CategoriesService, ProductsService } from '@frontend/products';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil, timer } from 'rxjs';
 
@@ -15,8 +15,8 @@ import { Subject, takeUntil, timer } from 'rxjs';
 export class ProductsFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   categories = [];
-  isSubmitted: boolean = false;
-  editMode: boolean = false;
+  isSubmitted = false;
+  editMode = false;
   imageDisplay: string | ArrayBuffer;
   currentProductId: string;
   endsubs$: Subject<void> = new Subject();

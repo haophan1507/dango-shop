@@ -30,7 +30,7 @@
     {
       "files": ["*.html"],
       "extends": ["plugin:@nrwl/nx/angular-template"],
-      "rules": { "no-empty": false }
+      "rules": { "no-empty": 0 }
     }
   ]
 }

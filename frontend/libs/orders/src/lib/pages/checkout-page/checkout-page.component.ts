@@ -62,16 +62,13 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       dateOrdered: `${Date.now()}`
     };
 
-    this.ordersService.createOrder(order).subscribe(
-      () => {
-        this.cartService.emptyCart();
-        this.router.navigate(['/success']);
-      },
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      () => {
+    this.ordersService.cacheOrderData(order);
 
+    this.ordersService.createCheckoutSession(this.orderItems).subscribe(error => {
+      if (error) {
+        console.log('error in redirect to payment');
       }
-    );
+    })
   }
 
   private _autoFillUserData() {
