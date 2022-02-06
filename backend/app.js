@@ -10,6 +10,8 @@ const categoriesRoutes = require('./routes/categories');
 const productsRoutes = require('./routes/products');
 const usersRoutes = require('./routes/users');
 const ordersRoutes = require('./routes/orders');
+const postsRoutes = require('./routes/posts');
+const commentsRoutes = require('./routes/comments');
 const errorHandler = require('./helpers/errorHandler');
 
 const app = express();
@@ -30,6 +32,8 @@ app.use(`${api}/categories`, categoriesRoutes);
 app.use(`${api}/products`, productsRoutes);
 app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/orders`, ordersRoutes);
+app.use(`${api}/posts`, postsRoutes);
+app.use(`${api}/comments`, commentsRoutes);
 
 mongoose.connect(process.env.CONNECTION_STRING)
   .then(() => {

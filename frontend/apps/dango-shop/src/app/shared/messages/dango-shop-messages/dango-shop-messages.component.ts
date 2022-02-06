@@ -17,7 +17,7 @@ export class DangoShopMessagesComponent implements OnInit {
       this.messageService.add({
         severity: 'success',
         summary: 'Thành công',
-        detail: 'Đã thêm vào giỏ hàng!'
+        detail: 'Đã cập nhật giỏ hàng!'
       });
     });
   }

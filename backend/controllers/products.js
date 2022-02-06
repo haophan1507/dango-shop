@@ -65,7 +65,7 @@ const createProductCtrl = expressAsyncHandler(
 
       product = await product.save();
 
-      if (!product) return res.status(500).send('The product cannot created');
+      if (!product) return res.status(400).send('The product cannot created');
 
       return res.send(product);
     } catch (err) {
