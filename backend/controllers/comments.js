@@ -1,12 +1,12 @@
 const { Comment } = require('../models/comment');
 const expressAsyncHandler = require("express-async-handler");
 const validateMongodbId = require('../helpers/validateMongodbID');
-const { Post } = require('../models/post');
+const { Product } = require('../models/product');
 
 const fetchCommentsCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
-      const commentList = await Comment.find();
+      const commentList = await Comment.find().populate('user', 'name').populate('product');
 
       if (!commentList)
         return res.status(500).json({ success: false });
@@ -23,7 +23,7 @@ const fetchCommentCtrl = expressAsyncHandler(
     try {
       const { id } = req.params;
       validateMongodbId(id);
-      const comment = await Comment.findById(id);
+      const comment = await Comment.findById(id).populate('user', 'name').populate('product');
 
       if (!comment)
         return res.status(500).json({ message: 'The comment ID not found' });
@@ -62,11 +62,11 @@ const updateCommentCtrl = expressAsyncHandler(
 const createCommentCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
-      const post = await Post.findById(req?.body?.post);
-      if (!post) return res.status(400).send('Invalid category');
+      const product = await Product.findById(req?.body?.product);
+      if (!product) return res.status(400).send('Invalid category');
 
       let comment = new Comment({
-        post: req.body?.post,
+        product: req.body?.product,
         user: req.body?.user,
         description: req.body?.description,
         rating: req.body?.rating

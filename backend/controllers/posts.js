@@ -5,7 +5,7 @@ const validateMongodbId = require('../helpers/validateMongodbID');
 const fetchPostsCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
-      const postList = await Post.find();
+      const postList = await Post.find().populate('user', 'name');
 
       if (!postList)
         return res.status(500).json({ success: false });
@@ -22,7 +22,7 @@ const fetchPostCtrl = expressAsyncHandler(
     try {
       const { id } = req.params;
       validateMongodbId(id);
-      const post = await Post.findById(id);
+      const post = await Post.findById(id).populate('user', 'name');
 
       if (!post)
         return res.status(500).json({ message: 'The post ID not found' });

@@ -30,12 +30,17 @@ const orderSchema = mongoose.Schema({
     required: true,
   },
   status: {
-    type: String,
+    type: Number,
     required: true,
-    default: '0',
+    default: 0,
   },
   totalPrice: {
     type: Number,
+  },
+  payment: {
+    type: Number,
+    required: true,
+    default: 0,
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
