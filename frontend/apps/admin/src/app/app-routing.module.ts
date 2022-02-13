@@ -7,6 +7,8 @@ import { CommentsListComponent } from './pages/comments/comments-list/comments-l
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
+import { PostsFormComponent } from './pages/posts/posts-form/posts-form.component';
+import { PostsListComponent } from './pages/posts/posts-list/posts-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
@@ -52,10 +54,6 @@ const routes: Routes = [
         component: ProductsFormComponent
       },
       {
-        path: 'comments',
-        component: CommentsListComponent
-      },
-      {
         path: 'users',
         component: UsersListComponent
       },
@@ -72,6 +70,22 @@ const routes: Routes = [
       }, {
         path: 'orders/:id',
         component: OrdersDetailComponent
+      },
+      {
+        path: 'comments',
+        component: CommentsListComponent
+      },
+      {
+        path: 'posts',
+        component: PostsListComponent
+      },
+      {
+        path: 'posts/form',
+        component: PostsFormComponent
+      },
+      {
+        path: 'posts/form/:id',
+        component: PostsFormComponent
       }
     ]
   },

@@ -43,6 +43,8 @@ import { UsersListComponent } from './pages/users/users-list/users-list.componen
 import { ResponsiveMenuComponent } from './shared/responsive-menu/responsive-menu.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { PostsListComponent } from './pages/posts/posts-list/posts-list.component';
+import { PostsFormComponent } from './pages/posts/posts-form/posts-form.component';
 
 const UX_MODULE = [
   ButtonModule,
@@ -80,7 +82,9 @@ const UX_MODULE = [
     OrdersListComponent,
     OrdersDetailComponent,
     ResponsiveMenuComponent,
-    CommentsListComponent
+    CommentsListComponent,
+    PostsListComponent,
+    PostsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -101,8 +105,6 @@ const UX_MODULE = [
     ConfirmationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent],
-  exports: [
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -17,6 +17,7 @@
     "paths": {
       "@env/*": ["environments/*"],
       "@frontend/orders": ["libs/orders/src/index.ts"],
+      "@frontend/posts": ["libs/posts/src/index.ts"],
       "@frontend/products": ["libs/products/src/index.ts"],
       "@frontend/ui": ["libs/ui/src/index.ts"],
       "@frontend/users": ["libs/users/src/index.ts"]

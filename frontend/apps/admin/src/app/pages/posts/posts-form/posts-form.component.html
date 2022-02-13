@@ -1,0 +1,80 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card
+    [header]="editMode ? 'Cập nhật bài viết' : 'Thêm bài viết mới'"
+    subheader="Bạn có thể thêm mới hoặc cập nhật bài viết"
+  >
+    <div class="grid mb-5">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left"></div>
+          <div class="p-toolbar-group-right">
+            <p-button
+              styleClass="p-button-primary mr-2"
+              [label]="editMode ? 'Cập nhật' : 'Thêm'"
+              icon="pi pi-plus"
+              (click)="onSubmit()"
+            ></p-button>
+            <p-button
+              styleClass="p-button-secondary"
+              label="Hủy"
+              icon="pi pi-arrow-circle-left"
+              (click)="onCancel()"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12">
+        <form [formGroup]="form">
+          <div class="p-fluid p-formgrid grid">
+            <div class="p-field col">
+              <label for="title">Tiêu đề</label>
+              <input
+                formControlName="title"
+                id="title"
+                type="text"
+                pInputText
+              />
+              <small
+                *ngIf="postForm.title.invalid && isSubmitted"
+                class="p-error"
+                >Vui lòng nhập tiêu đề
+              </small>
+            </div>
+            <div class="p-field col-12">
+              <label for="description">Nội dung</label><br />
+              <p-editor
+                formControlName="description"
+                [style]="{ height: '320px' }"
+              ></p-editor>
+              <small
+                *ngIf="postForm.description.invalid && isSubmitted"
+                class="p-error"
+                >Vui lòng nhập nội dung
+              </small>
+            </div>
+            <div class="p-field col-12">
+              <label for="name">Ảnh</label><br />
+              <input
+                type="file"
+                class="p-inputtext"
+                accept="image/*"
+                (change)="onImageUpload($event)"
+              />
+              <small
+                *ngIf="postForm.image.invalid && isSubmitted"
+                class="p-error"
+                >Vui lòng thêm ảnh</small
+              >
+              <div class="col-2 mt-2 pl-0">
+                <img style="width: 100%" [src]="imageDisplay" />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-card>
+</div>
