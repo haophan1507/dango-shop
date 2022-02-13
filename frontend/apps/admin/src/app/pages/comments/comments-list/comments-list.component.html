@@ -1,0 +1,74 @@
+<p-toast></p-toast>
+<div class="admin-page">
+  <p-card header="Danh mục" subheader="Danh sách các danh mục">
+    <div class="grid">
+      <div class="col-12">
+        <p-toolbar>
+          <div class="p-toolbar-group-left">
+            <p-button
+              styleClass="p-button-success"
+              label="Thêm mới"
+              icon="pi pi-plus"
+              routerLink="form"
+            ></p-button>
+          </div>
+        </p-toolbar>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="col-12">
+        <p-table
+          [paginator]="true"
+          [rows]="10"
+          [value]="comments"
+          styleClass="p-datatable-gridlines"
+          responsiveLayout="scroll"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Khách hàng</th>
+              <th pSortableColumn="rating">
+                Đánh giá <p-sortIcon field="rating"></p-sortIcon>
+              </th>
+              <th>Sản phẩm</th>
+              <th pSortableColumn="dateCreated">
+                Thời gian <p-sortIcon field="dateCreated"></p-sortIcon>
+              </th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-comment>
+            <tr>
+              <td>
+                {{ comment.user.name }}
+              </td>
+              <td>
+                <p>{{ comment.description }}</p>
+                <p-rating
+                  [(ngModel)]="comment.rating"
+                  [cancel]="false"
+                  [disabled]="true"
+                ></p-rating>
+              </td>
+              <td>{{ comment.product.name }}</td>
+              <td>{{ comment.dateCreated | date: 'short' }}</td>
+
+              <td>
+                <p-button
+                  styleClass="p-button-danger mr-2"
+                  icon="pi pi-trash"
+                  (click)="deleteComment(comment.id)"
+                ></p-button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </p-card>
+</div>
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+></p-confirmDialog>

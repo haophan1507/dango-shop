@@ -7,6 +7,7 @@ import { CategoriesService } from '@frontend/products';
 import { JwtInterceptor, UsersModule } from '@frontend/users';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { NgxStripeModule } from 'ngx-stripe';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
@@ -21,6 +22,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { RatingModule } from 'primeng/rating';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ToastModule } from 'primeng/toast';
@@ -30,6 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
+import { CommentsListComponent } from './pages/comments/comments-list/comments-list.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
@@ -40,7 +43,6 @@ import { UsersListComponent } from './pages/users/users-list/users-list.componen
 import { ResponsiveMenuComponent } from './shared/responsive-menu/responsive-menu.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { NgxStripeModule } from 'ngx-stripe';
 
 const UX_MODULE = [
   ButtonModule,
@@ -60,7 +62,8 @@ const UX_MODULE = [
   InputMaskModule,
   FieldsetModule,
   PanelMenuModule,
-  TooltipModule
+  TooltipModule,
+  RatingModule
 ];
 @NgModule({
   declarations: [
@@ -76,7 +79,8 @@ const UX_MODULE = [
     UsersFormComponent,
     OrdersListComponent,
     OrdersDetailComponent,
-    ResponsiveMenuComponent
+    ResponsiveMenuComponent,
+    CommentsListComponent
   ],
   imports: [
     BrowserModule,
@@ -97,6 +101,8 @@ const UX_MODULE = [
     ConfirmationService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+  ]
 })
 export class AppModule {}

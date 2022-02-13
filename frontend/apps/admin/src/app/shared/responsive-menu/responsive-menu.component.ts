@@ -45,6 +45,18 @@ export class ResponsiveMenuComponent implements OnInit {
             command: () => this.items[0].expanded = false
           },
           {
+            label: 'Đánh giá',
+            icon: 'pi pi-fw pi-comment',
+            routerLink: "/comments",
+            command: () => this.items[0].expanded = false
+          },
+          {
+            label: 'Bài viết',
+            icon: 'pi pi-fw pi-book',
+            routerLink: "/posts",
+            command: () => this.items[0].expanded = false
+          },
+          {
             label: 'Người dùng',
             icon: 'pi pi-fw pi-external-link',
             routerLink: "/users",
