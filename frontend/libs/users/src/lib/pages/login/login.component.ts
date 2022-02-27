@@ -47,6 +47,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  register() {
+    this.router.navigate(['/register']);
+  }
+
   private _initLoginForm() {
     this.loginFormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],

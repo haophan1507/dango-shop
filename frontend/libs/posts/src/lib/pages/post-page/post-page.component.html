@@ -1,0 +1,10 @@
+<div class="post-page" *ngIf="post">
+  <div class="grid">
+    <div class="col-10 mx-auto">
+      <h1>{{ post.title }}</h1>
+      <span class="mr-2">{{ post.user.name }}</span>
+      <span>{{ post.dateCreated | date: 'short' }}</span>
+      <p [innerHTML]="post.description"></p>
+    </div>
+  </div>
+</div>

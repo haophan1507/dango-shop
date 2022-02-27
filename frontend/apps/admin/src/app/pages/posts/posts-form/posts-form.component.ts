@@ -2,8 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { PostsService, Post } from '@frontend/posts';
-import { UsersService } from '@frontend/users';
+import { PostsService } from '@frontend/posts';
+import { LocalstorageService, UsersService } from '@frontend/users';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil, timer } from 'rxjs';
 
@@ -28,14 +28,16 @@ export class PostsFormComponent implements OnInit, OnDestroy {
     private postsService: PostsService,
     private usersService: UsersService,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private localstorageService: LocalstorageService
   ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      image: ['', Validators.required]
+      image: ['', Validators.required],
+      user: this.localstorageService.getUserIdFromToken()
     });
     this._getCurrentUser();
     this._checkEditMode();
@@ -57,24 +59,24 @@ export class PostsFormComponent implements OnInit, OnDestroy {
     })
 
     if (this.editMode) {
-      this._updatePost(postFormData);
+      this._updatePost(postFormData, this.currentPostId);
     } else {
       this._addPost(postFormData);
     }
   }
 
-  private _updatePost(postData: FormData) {
-    // this.postsService
-    //   .updatePost(post)
-    //   .pipe(takeUntil(this.endsubs$))
-    //   .subscribe(() => {
-    //     this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Danh mục đã được cập nhật' });
-    //     timer(1000).toPromise().then(() => {
-    //       this.location.back();
-    //     })
-    //   }, () => {
-    //     this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
-    //   });
+  private _updatePost(postData: FormData, postsId: string) {
+    this.postsService
+      .updatePost(postData, postsId)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe(() => {
+        this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Bài viết đã được cập nhật' });
+        timer(1000).toPromise().then(() => {
+          this.location.back();
+        })
+      }, () => {
+        this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
+      });
   }
 
   private _addPost(postData: FormData) {
@@ -125,7 +127,6 @@ export class PostsFormComponent implements OnInit, OnDestroy {
       .observeCurrentUser()
       .pipe(takeUntil(this.endsubs$))
       .subscribe((user) => {
-        console.log(user);
         if (user) {
           this.userId = user.id;
         }

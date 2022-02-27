@@ -11,8 +11,6 @@ export class GalleryComponent implements OnInit {
   @Input() images: string[];
 
   ngOnInit(): void {
-    console.log(this.images);
-
     if (this.hasImages) {
       this.selectedImageUrl = this.images[0];
     }

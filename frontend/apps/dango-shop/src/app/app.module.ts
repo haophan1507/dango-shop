@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { OrdersModule } from '@frontend/orders';
+import { PostsModule } from '@frontend/posts';
 import { ProductsModule } from '@frontend/products';
 import { UiModule } from '@frontend/ui';
 import { JwtInterceptor, UsersModule } from '@frontend/users';
@@ -54,6 +55,7 @@ const routes: Routes = [
     OrdersModule,
     ToastModule,
     UsersModule,
+    PostsModule,
     NgxStripeModule.forRoot('pk_test_51KOgxzFqZk9ebbKnL5lQw4tyL315L2T5O9uSfgrxIlMCLoLia4IVTvI8tfU1D4HAUyLLen9FuBSI06nJ5RYZD4UN00AWpVcAIi')
   ],
   providers: [

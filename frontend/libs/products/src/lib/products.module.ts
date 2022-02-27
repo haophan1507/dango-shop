@@ -8,6 +8,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { RatingModule } from 'primeng/rating';
+import { ImageModule } from 'primeng/image';
 import { TagModule } from 'primeng/tag';
 import { CategoriesBannerComponent } from './components/categories-banner/categories-banner.component';
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
     FormsModule,
     RatingModule,
     InputNumberModule,
+    ImageModule,
     UiModule,
     TagModule
   ],

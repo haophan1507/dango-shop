@@ -1,0 +1,8 @@
+<div class="new-posts">
+  <h3>Bài viết mới nhất</h3>
+  <div class="grid">
+    <div class="col-3" *ngFor="let post of newPosts">
+      <posts-post-item [post]="post"></posts-post-item>
+    </div>
+  </div>
+</div>

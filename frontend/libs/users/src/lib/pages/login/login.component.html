@@ -8,7 +8,7 @@
         <h3>Xin chào!</h3>
         <h2>Trang đăng nhập</h2>
         <form [formGroup]="loginFormGroup">
-          <div class="grid mt-6">
+          <div class="grid mt-5">
             <div class="col-12">
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"
@@ -62,6 +62,11 @@
                 styleClass="full-btn"
                 (onClick)="onSubmit()"
               ></p-button>
+              <a
+                (click)="register()"
+                class="block mt-2 text-right cursor-pointer"
+                >Đăng Ký</a
+              >
             </div>
             <div class="col-12" *ngIf="isSubmitted && authError">
               <small class="p-error">{{ authMessage }}</small>

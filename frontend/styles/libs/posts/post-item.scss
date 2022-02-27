@@ -1,0 +1,21 @@
+.post-item {
+  .image {
+    cursor: pointer;
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .p-card-content {
+    display: none;
+  }
+
+  .p-card-subtitle {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: 700;
+    width: 100%;
+  }
+}

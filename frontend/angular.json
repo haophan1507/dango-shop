@@ -5,7 +5,7 @@
       "projectType": "application",
       "root": "apps/admin",
       "sourceRoot": "apps/admin/src",
-      "prefix": "frontend",
+      "prefix": "admin",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -129,7 +129,7 @@
       "projectType": "application",
       "root": "apps/dango-shop",
       "sourceRoot": "apps/dango-shop/src",
-      "prefix": "frontend",
+      "prefix": "dango-shop",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -296,7 +296,7 @@
       "projectType": "library",
       "root": "libs/posts",
       "sourceRoot": "libs/posts/src",
-      "prefix": "frontend",
+      "prefix": "posts",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -322,7 +322,7 @@
       "projectType": "library",
       "root": "libs/products",
       "sourceRoot": "libs/products/src",
-      "prefix": "frontend",
+      "prefix": "products",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",
@@ -348,7 +348,7 @@
       "projectType": "library",
       "root": "libs/ui",
       "sourceRoot": "libs/ui/src",
-      "prefix": "frontend",
+      "prefix": "ui",
       "architect": {
         "test": {
           "builder": "@nrwl/jest:jest",

@@ -37,6 +37,9 @@ const fetchUserCtrl = expressAsyncHandler(
 const registerUserCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
+      const userExist = await User.findOne({ name: req?.body?.name });
+      if (userExist) return res.status(400).send('User already exists');
+
       let user = new User({
         name: req?.body?.name,
         email: req?.body?.email,
@@ -52,7 +55,7 @@ const registerUserCtrl = expressAsyncHandler(
 
       user = await user.save();
 
-      if (!user) return res.status(400).send('The user cannot be created');
+      if (!user) return res.status(500).send('The user cannot be created');
 
       return res.send(user);
     } catch (err) {

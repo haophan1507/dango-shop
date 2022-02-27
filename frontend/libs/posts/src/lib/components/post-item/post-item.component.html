@@ -1,0 +1,26 @@
+<!-- <div class="post-item" *ngIf="post">
+  <div class="post-item-wrapper">
+    <img
+      [src]="post.image"
+      [routerLink]="'/posts/' + post.id"
+      class="image"
+      alt=""
+    />
+    <h4 class="title">{{ post.title }}</h4>
+  </div>
+</div> -->
+<p-card
+  *ngIf="post"
+  class="post-item"
+  [subheader]="post.title"
+  styleClass="p-card-shadow"
+>
+  <ng-template pTemplate="header">
+    <img
+      alt="Card"
+      [src]="post.image"
+      [routerLink]="'/posts/' + post.id"
+      class="image"
+    />
+  </ng-template>
+</p-card>
