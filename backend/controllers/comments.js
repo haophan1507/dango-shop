@@ -40,6 +40,10 @@ const updateCommentCtrl = expressAsyncHandler(
     try {
       const { id } = req.params;
       validateMongodbId(id);
+
+      if (req?.user.userId !== id && !req?.user.isAdmin)
+        return res.status(400).json({ message: 'The user cannot access' });
+
       const comment = await Comment.findByIdAndUpdate(
         id,
         {
@@ -62,6 +66,9 @@ const updateCommentCtrl = expressAsyncHandler(
 const createCommentCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
+      if (req?.user.userId !== req.body?.user && !req?.user.isAdmin)
+        return res.status(400).json({ message: 'The user cannot access' });
+
       const product = await Product.findById(req?.body?.product);
       if (!product) return res.status(400).send('Invalid category');
 
@@ -88,6 +95,10 @@ const deleteCommentCtrl = expressAsyncHandler(
     try {
       const { id } = req.params;
       validateMongodbId(id);
+
+      if (req?.user.userId !== id && !req?.user.isAdmin)
+        return res.status(400).json({ message: 'The user cannot access' });
+
       const comment = await Comment.findByIdAndRemove(id);
       if (comment) {
         return res.status(200).json({ success: true, message: 'The comment is deleted!' });

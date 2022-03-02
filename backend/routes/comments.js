@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { authenticateJWT } = require('../helpers/jwt');
 const {
   fetchCommentsCtrl,
   fetchCommentCtrl,
@@ -12,10 +13,10 @@ router.get(`/`, fetchCommentsCtrl);
 
 router.get(`/:id`, fetchCommentCtrl);
 
-router.put(`/:id`, updateCommentCtrl);
+router.put(`/:id`, authenticateJWT, updateCommentCtrl);
 
-router.post('/', createCommentCtrl);
+router.post('/', authenticateJWT, createCommentCtrl);
 
-router.delete('/:id', deleteCommentCtrl);
+router.delete('/:id', authenticateJWT, deleteCommentCtrl);
 
 module.exports = router;

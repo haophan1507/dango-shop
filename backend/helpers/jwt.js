@@ -1,30 +1,47 @@
-const expressJwt = require('express-jwt');
+const jwt = require('jsonwebtoken');
 
-function authJwt() {
+const authenticateJWT = (req, res, next) => {
   const secret = process.env.SECRET_KEY;
-  const api = process.env.API_URL;
-  return expressJwt({
-    secret,
-    algorithms: ['HS256'],
-    isRevoked: isRevoked,
-  }).unless({
-    path: [
-      { url: /\/public\/uploads(.*)/, methods: ['GET', 'OPTIONS'] },
-      { url: /\/api\/v1\/products(.*)/, methods: ['GET', 'OPTIONS'] },
-      { url: /\/api\/v1\/categories(.*)/, methods: ['GET', 'OPTIONS'] },
-      { url: /\/api\/v1\/orders(.*)/, methods: ['GET', 'OPTIONS', 'POST'] },
-      { url: /\/api\/v1\/posts(.*)/, methods: ['GET', 'OPTIONS'] },
-      { url: /\/api\/v1\/comments(.*)/, methods: ['GET', 'OPTIONS'] },
-      `${api}/users/login`,
-      `${api}/users/register`
-    ]
-  });
+  const authHeader = req.headers.authorization;
+
+  if (authHeader) {
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token, secret, (err, user) => {
+      if (err) {
+        return res.status(403).json({ message: 'Logging is error' });
+      }
+
+      req.user = user;
+
+      next();
+    });
+  } else {
+    res.status(401).json({ message: 'User is not logged in' });
+  }
 };
 
-async function isRevoked(req, payload, done) {
-  if (!payload.isAdmin) done(null, true);
+const authenticateAdminJWT = (req, res, next) => {
+  const secret = process.env.SECRET_KEY;
+  const authHeader = req.headers.authorization;
 
-  done();
+  if (authHeader) {
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token, secret, (err, user) => {
+      if (err) {
+        return res.status(403).json({ message: 'Logging is error' });
+      }
+
+      if (!user.isAdmin) {
+        return res.status(401).json({ message: 'User is not admin' });
+      }
+
+      req.user = user;
+
+      next();
+    });
+  } else {
+    res.status(401).json({ message: 'User is not logged in' });
+  }
 };
 
-module.exports = authJwt;
+module.exports = { authenticateJWT, authenticateAdminJWT };

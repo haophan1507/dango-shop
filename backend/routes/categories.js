@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { authenticateAdminJWT } = require('../helpers/jwt');
 const {
   fetchCategoriesCtrl,
   fetchCategoryCtrl,
@@ -12,10 +13,10 @@ router.get(`/`, fetchCategoriesCtrl);
 
 router.get(`/:id`, fetchCategoryCtrl);
 
-router.put(`/:id`, updateCategoryCtrl);
+router.put(`/:id`, authenticateAdminJWT, updateCategoryCtrl);
 
-router.post('/', createCategoryCtrl);
+router.post('/', authenticateAdminJWT, createCategoryCtrl);
 
-router.delete('/:id', deleteCategoryCtrl);
+router.delete('/:id', authenticateAdminJWT, deleteCategoryCtrl);
 
 module.exports = router;

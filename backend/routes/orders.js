@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { authenticateJWT, authenticateAdminJWT } = require('../helpers/jwt');
 const {
   fetchOrdersCtrl,
   fetchOrderCtrl,
@@ -16,18 +17,18 @@ router.get(`/`, fetchOrdersCtrl);
 
 router.get(`/:id`, fetchOrderCtrl);
 
-router.post('/', createOrderCtrl);
+router.post('/', authenticateJWT, createOrderCtrl);
 
-router.post('/create-checkout-session', createCheckoutCtrl);
+router.post('/create-checkout-session', authenticateJWT, createCheckoutCtrl);
 
-router.put('/:id', updateOrderCtrl);
+router.put('/:id', authenticateAdminJWT, updateOrderCtrl);
 
-router.delete('/:id', deleteOrderCtrl);
+router.delete('/:id', authenticateAdminJWT, deleteOrderCtrl);
 
 router.get('/get/totalsales', fetchTotalSalesCtrl);
 
 router.get(`/get/count`, fetchCountOrderCtrl);
 
-router.get(`/get/userorders/:userid`, fetchUserOrderCtrl);
+router.get(`/get/userorders/:userid`, authenticateJWT, fetchUserOrderCtrl);
 
 module.exports = router;

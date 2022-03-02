@@ -23,6 +23,10 @@ const fetchUserCtrl = expressAsyncHandler(
     try {
       const { id } = req.params;
       validateMongodbId(id);
+
+      if (req?.user.userId !== id && !req?.user.isAdmin)
+        return res.status(400).json({ message: 'The user cannot access' });
+
       const user = await User.findById(id).select('-passwordHash');
 
       if (!user) return res.status(500).json({ message: 'The user not found' });
@@ -69,6 +73,10 @@ const updateUserCtrl = expressAsyncHandler(
     try {
       const { id } = req.params;
       validateMongodbId(id);
+
+      if (req?.user.userId !== id && !req?.user.isAdmin)
+        return res.status(400).json({ message: 'The user cannot update' });
+
       const userExist = await User.findById(id);
       let newPassword;
       if (req?.body?.password) {

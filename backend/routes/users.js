@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { authenticateJWT, authenticateAdminJWT } = require('../helpers/jwt');
 const {
   fetchUsersCtrl,
   fetchUserCtrl,
@@ -10,18 +11,18 @@ const {
   fetchCountUserCtrl
 } = require('../controllers/users');
 
-router.get(`/`, fetchUsersCtrl);
+router.get(`/`, authenticateAdminJWT, fetchUsersCtrl);
 
-router.get(`/:id`, fetchUserCtrl);
+router.get(`/:id`, authenticateJWT, fetchUserCtrl);
 
 router.post('/register', registerUserCtrl);
 
-router.put(`/:id`, updateUserCtrl);
+router.put(`/:id`, authenticateJWT, updateUserCtrl);
 
 router.post('/login', loginUserCtrl);
 
-router.delete('/:id', deleteUserCtrl);
+router.delete('/:id', authenticateAdminJWT, deleteUserCtrl);
 
-router.get(`/get/count`, fetchCountUserCtrl);
+router.get(`/get/count`, authenticateAdminJWT, fetchCountUserCtrl);
 
 module.exports = router;
