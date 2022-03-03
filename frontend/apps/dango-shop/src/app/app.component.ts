@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
-      this.router.url.includes('login') ? (this.isLogin = true) : (this.isLogin = false);
+      this.router.url.includes('login') || this.router.url.includes('register') ? (this.isLogin = true) : (this.isLogin = false);
     });
   }
 

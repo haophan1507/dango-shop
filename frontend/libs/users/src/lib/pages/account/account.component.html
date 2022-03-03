@@ -1,0 +1,25 @@
+<div class="account-wrapper">
+  <div class="grid">
+    <div class="account-sidebar col-2">
+      <div class="links">
+        <ul>
+          <li routerLink="/account/info" routerLinkActive="router-link-active">
+            <a><i class="pi pi-user-edit"></i>Tài khoản của tôi</a>
+          </li>
+          <li
+            routerLink="/account/orders"
+            routerLinkActive="router-link-active"
+          >
+            <a><i class="pi pi-shopping-cart"></i>Đơn mua</a>
+          </li>
+          <li (click)="logoutUser()">
+            <a class="logout"><i class="pi pi-sign-out"></i>Đăng xuất</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="account-main col-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardUser } from '@frontend/users';
 import { BadgeModule } from 'primeng/badge';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
@@ -12,9 +13,8 @@ import { CartIconComponent } from './components/cart-icon/cart-icon.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
-import { CartService } from './services/cart.service';
 import { ThankYouComponent } from './pages/thank-you/thank-you.component';
-import { AuthGuard } from '@frontend/users';
+import { CartService } from './services/cart.service';
 
 const routes: Routes = [
   {
@@ -23,7 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'checkout',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuardUser],
     component: CheckoutPageComponent
   },
   {

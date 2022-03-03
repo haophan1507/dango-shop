@@ -1,0 +1,13 @@
+<div class="card">
+  <p-tabView [(activeIndex)]="activeIndex">
+    <p-tabPanel header="Tất cả"> </p-tabPanel>
+    <p-tabPanel header="Chờ xác nhận"></p-tabPanel>
+    <p-tabPanel header="Đang xử lý"> </p-tabPanel>
+    <p-tabPanel header="Đang vận chuyển"> </p-tabPanel>
+    <p-tabPanel header="Đã giao hàng"> </p-tabPanel>
+    <p-tabPanel header="Thất bại"> </p-tabPanel>
+    <div *ngFor="let order of ordersFilter">
+      <users-account-order [order]="order"> </users-account-order>
+    </div>
+  </p-tabView>
+</div>

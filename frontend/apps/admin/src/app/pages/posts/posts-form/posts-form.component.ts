@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PostsService } from '@frontend/posts';
-import { LocalstorageService, UsersService } from '@frontend/users';
+import { UsersService } from '@frontend/users';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil, timer } from 'rxjs';
 
@@ -28,18 +28,17 @@ export class PostsFormComponent implements OnInit, OnDestroy {
     private postsService: PostsService,
     private usersService: UsersService,
     private location: Location,
-    private route: ActivatedRoute,
-    private localstorageService: LocalstorageService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this._getCurrentUser();
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       image: ['', Validators.required],
-      user: this.localstorageService.getUserIdFromToken()
+      user: this.userId
     });
-    this._getCurrentUser();
     this._checkEditMode();
   }
 

@@ -1,0 +1,44 @@
+<div
+  class="card surface-100 mb-5 p-3"
+  style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+>
+  <div class="grid">
+    <div class="col-6">
+      <div>{{ order.shippingAddress1 }} - {{ order.shippingAddress2 }}</div>
+      <div class="mt-1 font-italic">
+        {{ order.dateOrdered | date: 'short' }}
+      </div>
+    </div>
+    <div class="col-3 col-offset-3">
+      <p-tag
+        [value]="orderStatus[order.status].label"
+        [severity]="orderStatus[order.status].color"
+      ></p-tag>
+    </div>
+    <div class="col-12" *ngFor="let orderItem of order.orderItems">
+      <div class="grid">
+        <div class="col-2">
+          <img
+            [src]="orderItem.product.image"
+            alt=""
+            style="width: 100px; height: 100px; object-fit: cover"
+          />
+        </div>
+        <div class="col-7">
+          <h3>{{ orderItem.product.name }}</h3>
+          <p>Số lượng: {{ orderItem.quantity }}</p>
+        </div>
+        <div class="col-3">
+          <h4 style="color: #ff3a00">
+            Giá: {{ orderItem.product.price | currency: 'VND' }}
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 col-offset-8">
+      <h2 style="color: #ff3a00">
+        Tổng số tiền: {{ order.totalPrice | currency: 'VND' }}
+      </h2>
+    </div>
+  </div>
+</div>

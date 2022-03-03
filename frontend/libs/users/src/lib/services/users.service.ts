@@ -12,6 +12,7 @@ declare const require;
 })
 export class UsersService {
   apiURLUsers = environment.apiUrl + 'users';
+  apiURLOrders = environment.apiUrl + 'orders';
 
   constructor(
     private http: HttpClient,
@@ -30,7 +31,7 @@ export class UsersService {
   }
 
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.apiURLUsers, user);
+    return this.http.post<User>(`${this.apiURLUsers}/register`, user);
   }
 
   updateUser(user: User): Observable<User> {
@@ -58,6 +59,10 @@ export class UsersService {
 
   getCountry(countryKey: string): string {
     return countriesLib.getName(countryKey, 'vi');
+  }
+
+  getUsersOrder(userId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiURLOrders}/get/userorders/${userId}`);
   }
 
   initAppSession() {

@@ -5,13 +5,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
+import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
+import { TabViewModule } from 'primeng/tabview';
+import { ToastModule } from 'primeng/toast';
+import { AccountIconComponent } from './components/account-icon/account-icon.component';
+import { AccountInfoComponent } from './pages/account-info/account-info.component';
+import { AccountOrdersComponent } from './pages/account-orders/account-orders.component';
+import { AccountComponent } from './pages/account/account.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { AuthGuardUser } from './services/auth-guard-user.service';
 import { UsersEffects } from './state/users.effects';
 import { UsersFacade } from './state/users.facade';
+import { TagModule } from 'primeng/tag';
 import * as fromUsers from './state/users.reducer';
+import { AccountOrderComponent } from './components/account-order/account-order.component';
 
 const routes: Routes = [
   {
@@ -21,7 +32,26 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
-  }
+  },
+  {
+    path: 'account',
+    canActivate: [AuthGuardUser],
+    component: AccountComponent,
+    children: [
+      {
+        path: '',
+        component: AccountInfoComponent
+      },
+      {
+        path: 'info',
+        component: AccountInfoComponent
+      },
+      {
+        path: 'orders',
+        component: AccountOrdersComponent
+      },
+    ]
+  },
 ];
 
 @NgModule({
@@ -31,12 +61,18 @@ const routes: Routes = [
     InputTextModule,
     ButtonModule,
     InputMaskModule,
+    CardModule,
     FormsModule,
+    ToastModule,
+    DropdownModule,
+    TabViewModule,
+    TagModule,
     ReactiveFormsModule,
     StoreModule.forFeature(fromUsers.USERS_FEATURE_KEY, fromUsers.reducer),
     EffectsModule.forFeature([UsersEffects])
   ],
-  declarations: [LoginComponent, RegisterComponent],
-  providers: [UsersFacade]
+  declarations: [LoginComponent, RegisterComponent, AccountIconComponent, AccountComponent, AccountInfoComponent, AccountOrdersComponent, AccountOrderComponent],
+  providers: [UsersFacade],
+  exports: [AccountIconComponent, AccountOrderComponent]
 })
 export class UsersModule {}

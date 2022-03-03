@@ -1,0 +1,39 @@
+.account {
+  &-wrapper {
+    min-height: calc(100vh - 300px);
+
+    .links {
+      ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: block;
+          list-style: none;
+          width: 100%;
+          cursor: pointer;
+          a {
+            color: var(--text-color);
+            padding: 10px 15px;
+            display: block;
+            width: 100%;
+            i {
+              margin-right: 8px;
+              margin-top: 0px;
+              float: left;
+            }
+            &:hover {
+              color: var(--blue-500);
+            }
+          }
+
+          &.router-link-active {
+            a {
+              color: var(--blue-500);
+            }
+          }
+        }
+      }
+    }
+  }
+}
