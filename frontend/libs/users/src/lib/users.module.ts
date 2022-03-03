@@ -23,6 +23,7 @@ import { UsersFacade } from './state/users.facade';
 import { TagModule } from 'primeng/tag';
 import * as fromUsers from './state/users.reducer';
 import { AccountOrderComponent } from './components/account-order/account-order.component';
+import { AccountChangePasswordComponent } from './pages/account-change-password/account-change-password.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
         path: 'orders',
         component: AccountOrdersComponent
       },
+      {
+        path: 'change-password',
+        component: AccountChangePasswordComponent
+      }
     ]
   },
 ];
@@ -71,7 +76,7 @@ const routes: Routes = [
     StoreModule.forFeature(fromUsers.USERS_FEATURE_KEY, fromUsers.reducer),
     EffectsModule.forFeature([UsersEffects])
   ],
-  declarations: [LoginComponent, RegisterComponent, AccountIconComponent, AccountComponent, AccountInfoComponent, AccountOrdersComponent, AccountOrderComponent],
+  declarations: [LoginComponent, RegisterComponent, AccountIconComponent, AccountComponent, AccountInfoComponent, AccountOrdersComponent, AccountOrderComponent, AccountChangePasswordComponent],
   providers: [UsersFacade],
   exports: [AccountIconComponent, AccountOrderComponent]
 })

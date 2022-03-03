@@ -36,9 +36,5 @@ export class AccountOrdersComponent implements OnInit, DoCheck {
     } else {
       this.ordersFilter = this.orders.filter(item => item.status === this.activeIndex - 1)
     }
-    console.log(this.activeIndex)
-    console.log(this.ordersFilter)
   }
-
-
 }
