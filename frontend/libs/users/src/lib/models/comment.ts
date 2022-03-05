@@ -1,11 +1,9 @@
-import { Product } from "./product";
-
 export class Comment {
   id?: string;
-  product?: Product;
-  user?: any;
+  product?: string;
+  user?: string;
   orderItem?: string;
   description?: string;
-  rating?: number;
+  rating?: string;
   dateCreated?: string;
 }

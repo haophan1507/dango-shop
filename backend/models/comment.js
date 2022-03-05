@@ -11,6 +11,11 @@ const commentSchema = mongoose.Schema({
     ref: "User",
     require: true
   },
+  orderItem: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "OrderItem",
+    require: true
+  },
   description: {
     type: String,
     require: true

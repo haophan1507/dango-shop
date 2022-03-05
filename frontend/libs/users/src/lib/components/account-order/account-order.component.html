@@ -21,12 +21,37 @@
           <img
             [src]="orderItem.product.image"
             alt=""
-            style="width: 100px; height: 100px; object-fit: cover"
+            style="
+              width: 100px;
+              height: 100px;
+              object-fit: cover;
+              cursor: pointer;
+            "
+            (click)="handleNavigateProduct(orderItem.product.id)"
           />
         </div>
         <div class="col-7">
           <h3>{{ orderItem.product.name }}</h3>
           <p>Số lượng: {{ orderItem.quantity }}</p>
+
+          <div *ngIf="order.status === 3">
+            <p-tag
+              *ngIf="orderItem.isReview"
+              icon="pi pi-check"
+              value="Đã đánh giá"
+            ></p-tag>
+            <div *ngIf="!orderItem.isReview">
+              <p-tag
+                severity="warning"
+                icon="pi pi-exclamation-triangle"
+                value="Chưa đánh giá"
+              ></p-tag>
+              <hr />
+              <users-account-comment
+                [orderItem]="orderItem"
+              ></users-account-comment>
+            </div>
+          </div>
         </div>
         <div class="col-3">
           <h4 style="color: #ff3a00">

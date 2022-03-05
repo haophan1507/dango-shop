@@ -46,17 +46,31 @@ export class CartPageComponent implements OnInit, OnDestroy {
                 product: product,
                 quantity: cart.quantity
               })
+              this.cartItemsDetailed.sort(this.compare);
             })
         })
       })
   }
 
+  private compare(a, b) {
+    if (a.product.name < b.product.name) {
+      return -1;
+    }
+    if (a.product.name > b.product.name) {
+      return 1;
+    }
+    return 0;
+  }
+
   updateCartItemQuantity(event, cartItem: CartItemDetailed) {
-    if (event.originalEvent instanceof MouseEvent) {
+    if (typeof event.value === 'number') {
+      if (event.value === 0) event.value = 1;
+      if (event.value > cartItem.product.countInStock)
+        event.value = cartItem.product.countInStock;
       this.cartService.setCartItem({
         productId: cartItem.product.id,
         quantity: event.value
-      }, true);
+      }, true)
     }
   }
 

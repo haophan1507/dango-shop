@@ -1,4 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { Order, ORDER_STATUS } from '@frontend/orders';
 
 @Component({
@@ -10,4 +12,10 @@ import { Order, ORDER_STATUS } from '@frontend/orders';
 export class AccountOrderComponent {
   @Input() order: Order;
   orderStatus = ORDER_STATUS;
+
+  constructor(private router: Router) {}
+
+  handleNavigateProduct(productId) {
+    this.router.navigateByUrl(`/products/${productId}`);
+  }
 }

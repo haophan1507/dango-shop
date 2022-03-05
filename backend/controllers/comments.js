@@ -2,6 +2,7 @@ const { Comment } = require('../models/comment');
 const expressAsyncHandler = require("express-async-handler");
 const validateMongodbId = require('../helpers/validateMongodbID');
 const { Product } = require('../models/product');
+const { OrderItem } = require('../models/orderItem');
 
 const fetchCommentsCtrl = expressAsyncHandler(
   async (req, res) => {
@@ -70,11 +71,15 @@ const createCommentCtrl = expressAsyncHandler(
         return res.status(400).json({ message: 'The user cannot access' });
 
       const product = await Product.findById(req?.body?.product);
-      if (!product) return res.status(400).send('Invalid category');
+      if (!product) return res.status(400).send('Invalid product');
+
+      const orderItem = await OrderItem.findById(req?.body?.orderItem);
+      if (!orderItem || orderItem.isReview === true) return res.status(400).send('Invalid order item');
 
       let comment = new Comment({
         product: req.body?.product,
         user: req.body?.user,
+        orderItem: req.body?.orderItem,
         description: req.body?.description,
         rating: req.body?.rating
       });
@@ -82,6 +87,16 @@ const createCommentCtrl = expressAsyncHandler(
       comment = await comment.save();
 
       if (!comment) return res.status(400).send('The comment cannot be created');
+
+      await OrderItem.findByIdAndUpdate(req.body?.orderItem, { isReview: true });
+
+      await Product.findByIdAndUpdate(
+        req.body?.product,
+        {
+          rating: product.rating + req.body?.rating,
+          numReviews: product.numReviews + 1
+        }
+      );
 
       return res.send(comment);
     } catch (err) {

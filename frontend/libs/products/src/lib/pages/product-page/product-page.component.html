@@ -8,11 +8,12 @@
       <p class="product-desc">{{ product.description }}</p>
       <div class="product-rating">
         <p-rating
-          [(ngModel)]="product.rating"
+          [(ngModel)]="product.rating / product.numReviews"
           [cancel]="false"
           [disabled]="true"
         ></p-rating>
       </div>
+      <p class="font-italic">Số lượng đánh giá: {{ product.numReviews }}</p>
       <div class="product-price">
         {{ product.price | currency: 'VND' }}
         <!-- <span class="price-before">{{

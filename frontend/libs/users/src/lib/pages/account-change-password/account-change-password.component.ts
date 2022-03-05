@@ -66,7 +66,6 @@ export class AccountChangePasswordComponent implements OnInit {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
       const matchingControl = formGroup.controls[matchingControlName];
-      console.log(control, matchingControl);
 
       if (matchingControl.errors && !matchingControl.errors.confirmedValidator) {
         return;

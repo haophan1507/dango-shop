@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
+import { Comment } from '../models/comment';
 import { environment } from '@env/environment';
 import * as countriesLib from 'i18n-iso-countries';
 import { UsersFacade } from '../state/users.facade';
@@ -13,6 +14,7 @@ declare const require;
 export class UsersService {
   apiURLUsers = environment.apiUrl + 'users';
   apiURLOrders = environment.apiUrl + 'orders';
+  apiURLComments = environment.apiUrl + 'comments';
 
   constructor(
     private http: HttpClient,
@@ -63,6 +65,10 @@ export class UsersService {
 
   getUsersOrder(userId: string): Observable<any> {
     return this.http.get<any>(`${this.apiURLOrders}/get/userorders/${userId}`);
+  }
+
+  createComment(comment: Comment): Observable<Comment> {
+    return this.http.post<Comment>(this.apiURLComments, comment);
   }
 
   initAppSession() {
