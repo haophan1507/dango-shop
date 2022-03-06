@@ -21,6 +21,7 @@ export class AccountChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
+      password: ['', Validators.required],
       newPassword: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     }, {
@@ -37,7 +38,9 @@ export class AccountChangePasswordComponent implements OnInit {
         if (user) {
           this.usersService.updateUser({
             id: user.id,
-            password: this.userForm.newPassword.value
+            password: this.userForm.password.value,
+            newPassword: this.userForm.newPassword.value,
+            confirmPassword: this.userForm.newPassword.value
           }).subscribe(
             () => {
               this.messageService.add({

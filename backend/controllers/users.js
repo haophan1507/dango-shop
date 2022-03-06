@@ -77,11 +77,26 @@ const updateUserCtrl = expressAsyncHandler(
         return res.status(400).json({ message: 'The user cannot update' });
 
       const userExist = await User.findById(id);
+      if (!userExist)
+        return res.status(400).json({ message: 'Invalid user' });
+
       let newPassword;
-      if (req?.body?.password) {
-        newPassword = bcrypt.hashSync(req?.body?.password, 10);
+      if (req?.body?.newPassword === req?.body?.confirmPassword && !!req?.body?.newPassword) {
+        //case change password
+        //compare old password and change
+        const comparePassword = bcrypt.compareSync(req?.body?.password, userExist.passwordHash);
+        if (comparePassword) {
+          newPassword = bcrypt.hashSync(req?.body?.newPassword, 10);
+        } else {
+          return res.status(400).json({ message: 'Password wrong' });
+        }
       } else {
-        newPassword = userExist.passwordHash;
+        //case update user
+        if (req?.body?.password) {
+          newPassword = bcrypt.hashSync(req?.body?.password, 10);
+        } else {
+          newPassword = userExist.passwordHash;
+        }
       }
 
       const user = await User.findByIdAndUpdate(
