@@ -1,13 +1,13 @@
 <div class="posts-list">
   <div class="grid">
-    <div class="col-10 mx-auto">
-      <h1>Bài viết</h1>
-      <hr />
+    <p-card header="Bài viết" class="col-10 mx-auto">
       <div class="grid">
-        <div class="col-3" *ngFor="let post of posts">
-          <posts-post-item [post]="post"></posts-post-item>
+        <div class="col-10" *ngFor="let post of posts">
+          <posts-post-item-horizontal
+            [post]="post"
+          ></posts-post-item-horizontal>
         </div>
       </div>
-    </div>
+    </p-card>
   </div>
 </div>
