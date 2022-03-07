@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartItem, CartService } from '@frontend/orders';
 import { Subject, takeUntil } from 'rxjs';
+import { Comment } from '../../models/comment';
 import { Product } from '../../models/product';
 import { ProductsService } from '../../services/products.service';
 
@@ -13,6 +14,7 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductPageComponent implements OnInit, OnDestroy {
   product: Product;
+  comments: Comment[];
   quantity = 1;
   endsubs$: Subject<void> = new Subject();
 
@@ -27,6 +29,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     this.route.params.subscribe(params => {
       if (params.productid) {
         this._getProduct(params.productid);
+        this._getComments(params.productid);
       }
     })
   }
@@ -51,6 +54,13 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     };
     this.cartService.setCartItem(cartItem);
     this.router.navigateByUrl('/cart');
+  }
+
+  private _getComments(id: string) {
+    this.prodService
+      .getCommentsProducts(id)
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe(comments => this.comments = comments);
   }
 
   private _getProduct(id: string) {

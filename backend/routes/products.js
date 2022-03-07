@@ -10,7 +10,8 @@ const {
   deleteProductCtrl,
   fetchCountProductCtrl,
   fetchFeaturedProductCtrl,
-  updateImagesProductCtrl
+  updateImagesProductCtrl,
+  fetchCommentsProductCtrl
 } = require('../controllers/products');
 
 router.get(`/`, fetchProductsCtrl);
@@ -28,5 +29,7 @@ router.get(`/get/count`, fetchCountProductCtrl);
 router.get(`/get/featured/:count`, fetchFeaturedProductCtrl);
 
 router.put('/gallery-images/:id', authenticateAdminJWT, uploadOptions.array('images', 10), updateImagesProductCtrl);
+
+router.get(`/get/comments/:id`, fetchCommentsProductCtrl);
 
 module.exports = router;

@@ -6,9 +6,10 @@ import { UiModule } from '@frontend/ui';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
 import { CheckboxModule } from 'primeng/checkbox';
+import { DataViewModule } from 'primeng/dataview';
+import { ImageModule } from 'primeng/image';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { RatingModule } from 'primeng/rating';
-import { ImageModule } from 'primeng/image';
 import { TagModule } from 'primeng/tag';
 import { CategoriesBannerComponent } from './components/categories-banner/categories-banner.component';
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
@@ -43,7 +44,8 @@ const routes: Routes = [
     InputNumberModule,
     ImageModule,
     UiModule,
-    TagModule
+    TagModule,
+    DataViewModule
   ],
   declarations: [
     ProductsSearchComponent,

@@ -1,5 +1,6 @@
 const { Category } = require('../models/category');
 const { Product } = require('../models/product');
+const { Comment } = require('../models/comment');
 const expressAsyncHandler = require("express-async-handler");
 const validateMongodbId = require('../helpers/validateMongodbID');
 
@@ -204,6 +205,26 @@ const updateImagesProductCtrl = expressAsyncHandler(
   }
 );
 
+const fetchCommentsProductCtrl = expressAsyncHandler(
+  async (req, res) => {
+    try {
+      const { id } = req.params;
+      validateMongodbId(id);
+
+      const commentsList = await Comment.find({ product: id })
+        .populate('user')
+        .sort({ 'dateOrdered': -1 });
+
+
+      if (!commentsList) return res.status(500).json({ success: false });
+
+      return res.send(commentsList);
+    } catch (err) {
+      return res.status(500).json({ success: false, error: err.message });
+    };
+  }
+);
+
 module.exports = {
   fetchProductsCtrl,
   fetchProductCtrl,
@@ -212,5 +233,6 @@ module.exports = {
   deleteProductCtrl,
   fetchCountProductCtrl,
   fetchFeaturedProductCtrl,
-  updateImagesProductCtrl
+  updateImagesProductCtrl,
+  fetchCommentsProductCtrl
 };

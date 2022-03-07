@@ -60,9 +60,35 @@
     </div>
   </div>
   <div class="grid">
-    <h2 class="col-3">MÔ TẢ SẢN PHẨM</h2>
-    <div class="col-12 product-rich-desc">
+    <div class="col-10 col-offset-1 product-rich-desc">
+      <h2 class="col-3 p-0">MÔ TẢ SẢN PHẨM</h2>
       <div [innerHTML]="product.richDescription"></div>
+    </div>
+  </div>
+  <div class="grid" *ngIf="comments.length > 0">
+    <div class="col-10 col-offset-1">
+      <h2 class="col-3 p-0">ĐÁNH GIÁ SẢN PHẨM</h2>
+      <p-dataView
+        [value]="comments"
+        [paginator]="true"
+        [rows]="10"
+        layout="list"
+        [sortField]="sortField"
+        [sortOrder]="sortOrder"
+      >
+        <ng-template let-comment pTemplate="listItem">
+          <div class="w-full px-3 py-2">
+            <h4 class="m-0 py-1">{{ comment.user.name }}</h4>
+            <span class="py-1">{{ comment.dateCreated | date: 'short' }}</span>
+            <p-rating
+              [(ngModel)]="comment.rating"
+              [cancel]="false"
+              [disabled]="true"
+            ></p-rating>
+            <p>{{ comment.description }}</p>
+          </div>
+        </ng-template>
+      </p-dataView>
     </div>
   </div>
 </div>

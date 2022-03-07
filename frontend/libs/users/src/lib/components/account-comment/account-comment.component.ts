@@ -61,7 +61,7 @@ export class AccountCommentComponent implements OnInit {
     const productId = product.id;
 
     const description =
-      `${this.ratingForm.description.value} ${this.arrSuggest.filter(item => item.select === true).map(item => item.message).toString()}`;
+      `${this.ratingForm.description.value} ${this.arrSuggest.filter(item => item.select === true).map(item => item.message).join(', ')}`;
 
     const comment: Comment = {
       product: productId,
