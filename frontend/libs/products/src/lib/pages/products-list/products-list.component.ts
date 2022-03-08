@@ -24,11 +24,18 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      params.categoryid ? this._getProducts([params.categoryid]) : this._getProducts();
-      params.categoryid ? (this.isCategoryPage = true) : (this.isCategoryPage = false);
+    this.route.queryParams.subscribe(queryParams => {
+      if (queryParams.name) {
+        this.isCategoryPage = true;
+        this._getProductsSearch(queryParams.name);
+      } else {
+        this.route.params.subscribe(params => {
+          params.categoryid ? this._getProducts([params.categoryid]) : this._getProducts();
+          params.categoryid ? (this.isCategoryPage = true) : (this.isCategoryPage = false);
+        })
+        this._getCategories();
+      }
     })
-    this._getCategories();
   }
 
   ngOnDestroy() {
@@ -43,6 +50,16 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       .map(category => category.id);
 
     this._getProducts(selectedCategories)
+  }
+
+  private _getProductsSearch(nameProduct: string) {
+    this.prodService
+      .getProducts()
+      .pipe(takeUntil(this.endsubs$))
+      .subscribe(products => {
+        const arrSearch = products.filter(item => item.name.toLowerCase().includes(nameProduct.trim().toLowerCase()));
+        this.products = arrSearch;
+      });
   }
 
   private _getCategories() {

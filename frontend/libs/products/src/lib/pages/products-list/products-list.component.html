@@ -1,4 +1,4 @@
-<div class="products-page">
+<div class="products-page" style="min-height: calc(100vh - 300px)">
   <div class="grid">
     <div class="col-3" *ngIf="!isCategoryPage">
       <h4>Danh mục</h4>
@@ -21,6 +21,9 @@
           <products-product-item [product]="product"></products-product-item>
         </div>
       </div>
+      <h3 *ngIf="products.length === 0" class="text-center">
+        Không tìm thấy sản phẩm
+      </h3>
     </div>
   </div>
 </div>

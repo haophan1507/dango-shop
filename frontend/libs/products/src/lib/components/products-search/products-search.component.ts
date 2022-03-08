@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'products-search',
@@ -6,11 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class ProductsSearchComponent implements OnInit {
+export class ProductsSearchComponent {
+  value = '';
 
-  constructor() {}
+  constructor(
+    private router: Router
+  ) {}
 
-  ngOnInit(): void {
+  onSearch() {
+    if (this.value) {
+      this.router.navigateByUrl(`/products?name=${this.value}`);
+      this.value = '';
+    }
   }
 
 }
