@@ -53,11 +53,7 @@ const routes: Routes = [
     ThankYouComponent
   ],
   exports: [
-    CartIconComponent,
-    CartPageComponent,
-    OrderSummaryComponent,
-    CheckoutPageComponent,
-    ThankYouComponent
+    CartIconComponent
   ]
 })
 export class OrdersModule {

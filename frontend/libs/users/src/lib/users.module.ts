@@ -85,6 +85,6 @@ const routes: Routes = [
   ],
   declarations: [LoginComponent, RegisterComponent, AccountIconComponent, AccountComponent, AccountInfoComponent, AccountOrdersComponent, AccountOrderComponent, AccountChangePasswordComponent, AccountCommentComponent],
   providers: [UsersFacade],
-  exports: [AccountIconComponent, AccountOrderComponent]
+  exports: [AccountIconComponent]
 })
 export class UsersModule {}

@@ -11,3 +11,4 @@ export * from './lib/services/auth-guard-user.service';
 export * from './lib/services/auth.service';
 export * from './lib/services/jwt.interceptor';
 export * from './lib/services/localstorage.service';
+export * from './lib/components/account-icon/account-icon.component';

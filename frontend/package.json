@@ -8,7 +8,9 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "lint": "nx workspace-lint && ng lint"
+    "lint": "nx workspace-lint && ng lint",
+    "build-prod-dango-shop": "nx build dango-shop --prod --output-path ../dango-shop --base-href /dango-shop/",
+    "build-prod-admin": "nx build admin --prod --output-path ../admin --base-href /admin/"
   },
   "private": true,
   "dependencies": {

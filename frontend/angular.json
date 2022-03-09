@@ -167,8 +167,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "apps/dango-shop/src/environments/environment.ts",
-                  "with": "apps/dango-shop/src/environments/environment.prod.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
