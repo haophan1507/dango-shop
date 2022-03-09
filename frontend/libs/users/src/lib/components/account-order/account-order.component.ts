@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { Order, ORDER_STATUS } from '@frontend/orders';
+import { Order } from '../../models/order';
+import { ORDER_STATUS } from '../../order.constants';
 
 @Component({
   selector: 'users-account-order',

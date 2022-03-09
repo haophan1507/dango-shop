@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { OrderItem } from '@frontend/orders';
 import { MessageService } from 'primeng/api';
 import { Comment } from '../../models/comment';
+import { OrderItem } from '../../models/order-item';
 import { UsersService } from '../../services/users.service';
 
 @Component({
