@@ -31,6 +31,7 @@
     "@nrwl/angular": "13.7.3",
     "@stripe/stripe-js": "^1.22.0",
     "animate.css": "^4.1.1",
+    "chart.js": "^3.7.1",
     "font-awesome": "^4.7.0",
     "i18n-iso-countries": "^7.2.0",
     "ngx-stripe": "^13.0.0",

@@ -1,0 +1,15 @@
+<div class="admin-page">
+  <p-card header="Thống kê đơn hàng">
+    <label class="mr-3" for="yearpicker">Chọn năm</label>
+    <p-calendar
+      [(ngModel)]="inputDate"
+      [defaultDate]="inputDate"
+      view="year"
+      dateFormat="yy"
+      inputId="yearpicker"
+      (onSelect)="onYearChange($event)"
+    ></p-calendar>
+
+    <p-chart type="bar" [data]="chartData" height="80vh"></p-chart>
+  </p-card>
+</div>

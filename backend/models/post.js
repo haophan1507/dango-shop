@@ -5,6 +5,10 @@ const postSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  intro: {
+    type: String,
+    required: true
+  },
   description: {
     type: String,
     required: true

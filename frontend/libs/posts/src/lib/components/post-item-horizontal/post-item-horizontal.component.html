@@ -6,18 +6,17 @@
           [src]="post.image"
           alt=""
           class="w-full h-10rem"
-          style="object-fit: cover"
+          style="object-fit: cover; cursor: pointer"
+          (click)="handleNavigatePost(post.id)"
         />
       </div>
       <div class="col-9">
-        <h3>{{ post.title }}</h3>
+        <h3 (click)="handleNavigatePost(post.id)" style="cursor: pointer">
+          {{ post.title }}
+        </h3>
         <span class="mr-2">{{ post.user.name }}</span>
         <span>{{ post.dateCreated | date: 'short' }}</span>
-        <p-button
-          label="Xem thêm"
-          class="block mt-3"
-          (click)="handleNavigatePost(post.id)"
-        ></p-button>
+        <p style="text-align: justify">{{ post.intro }}</p>
       </div>
     </div>
   </div>

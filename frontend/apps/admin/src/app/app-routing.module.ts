@@ -4,6 +4,7 @@ import { AuthGuard } from '@frontend/users';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { CommentsListComponent } from './pages/comments/comments-list/comments-list.component';
+import { CountOrdersComponent } from './pages/dashboard/count-orders/count-orders.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
+      },
+      {
+        path: 'dashboard/count-orders',
+        component: CountOrdersComponent
       },
       {
         path: 'categories',

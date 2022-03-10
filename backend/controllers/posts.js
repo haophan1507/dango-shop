@@ -58,6 +58,7 @@ const updatePostCtrl = expressAsyncHandler(
         {
           title: req.body?.title,
           description: req.body?.description,
+          intro: req.body?.intro,
           image: imagepath
         },
         { new: true },
@@ -84,6 +85,7 @@ const createPostCtrl = expressAsyncHandler(
       let post = new Post({
         title: req.body?.title,
         description: req.body?.description,
+        intro: req.body?.intro,
         image: `${basePath}${fileName}`,
         user: req.body?.user
       });

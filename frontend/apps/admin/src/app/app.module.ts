@@ -10,7 +10,9 @@ import { StoreModule } from '@ngrx/store';
 import { NgxStripeModule } from 'ngx-stripe';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { CalendarModule } from 'primeng/calendar';
 import { CardModule } from 'primeng/card';
+import { ChartModule } from 'primeng/chart';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -33,9 +35,12 @@ import { AppComponent } from './app.component';
 import { CategoriesFormComponent } from './pages/categories/categories-form/categories-form.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { CommentsListComponent } from './pages/comments/comments-list/comments-list.component';
+import { CountOrdersComponent } from './pages/dashboard/count-orders/count-orders.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
+import { PostsFormComponent } from './pages/posts/posts-form/posts-form.component';
+import { PostsListComponent } from './pages/posts/posts-list/posts-list.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
 import { UsersFormComponent } from './pages/users/users-form/users-form.component';
@@ -43,8 +48,6 @@ import { UsersListComponent } from './pages/users/users-list/users-list.componen
 import { ResponsiveMenuComponent } from './shared/responsive-menu/responsive-menu.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { PostsListComponent } from './pages/posts/posts-list/posts-list.component';
-import { PostsFormComponent } from './pages/posts/posts-form/posts-form.component';
 
 const UX_MODULE = [
   ButtonModule,
@@ -65,7 +68,9 @@ const UX_MODULE = [
   FieldsetModule,
   PanelMenuModule,
   TooltipModule,
-  RatingModule
+  RatingModule,
+  CalendarModule,
+  ChartModule
 ];
 @NgModule({
   declarations: [
@@ -84,7 +89,8 @@ const UX_MODULE = [
     ResponsiveMenuComponent,
     CommentsListComponent,
     PostsListComponent,
-    PostsFormComponent
+    PostsFormComponent,
+    CountOrdersComponent
   ],
   imports: [
     BrowserModule,

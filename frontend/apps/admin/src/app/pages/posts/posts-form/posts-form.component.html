@@ -44,6 +44,20 @@
               </small>
             </div>
             <div class="p-field col-12">
+              <label for="intro">Giới thiệu</label>
+              <textarea
+                formControlName="intro"
+                [rows]="7"
+                [cols]="30"
+                pInputTextarea
+              ></textarea>
+              <small
+                *ngIf="postForm.intro.invalid && isSubmitted"
+                class="p-error"
+                >Vui lòng nhập giới thiệu
+              </small>
+            </div>
+            <div class="p-field col-12">
               <label for="description">Nội dung</label><br />
               <p-editor
                 formControlName="description"

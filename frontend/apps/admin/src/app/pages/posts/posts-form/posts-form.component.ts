@@ -36,6 +36,7 @@ export class PostsFormComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
+      intro: ['', Validators.required],
       image: ['', Validators.required],
       user: this.userId
     });
@@ -52,6 +53,7 @@ export class PostsFormComponent implements OnInit, OnDestroy {
     if (this.form.invalid) return;
 
     const postFormData = new FormData();
+    this.postForm.user.setValue(this.userId);
 
     Object.keys(this.postForm).map((key) => {
       postFormData.append(key, this.postForm[key].value);
@@ -113,6 +115,7 @@ export class PostsFormComponent implements OnInit, OnDestroy {
         this.postsService.getPost(params.id).subscribe(post => {
           this.postForm.title.setValue(post.title);
           this.postForm.description.setValue(post.description);
+          this.postForm.intro.setValue(post.intro);
           this.imageDisplay = post.image;
           this.postForm.image.setValidators([]);
           this.postForm.image.updateValueAndValidity();

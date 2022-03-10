@@ -46,6 +46,7 @@ const registerUserCtrl = expressAsyncHandler(
 
       let user = new User({
         name: req?.body?.name,
+        email: req?.body?.email,
         passwordHash: await bcrypt.hashSync(req?.body?.password, 10),
         phone: req?.body?.phone,
         isAdmin: req?.body?.isAdmin,
@@ -103,7 +104,6 @@ const updateUserCtrl = expressAsyncHandler(
         req?.params?.id,
         {
           name: req?.body?.name,
-          email: req?.body?.email,
           passwordHash: newPassword,
           phone: req?.body?.phone,
           isAdmin: req?.body?.isAdmin,
