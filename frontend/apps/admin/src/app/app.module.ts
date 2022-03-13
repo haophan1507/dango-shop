@@ -48,6 +48,9 @@ import { UsersListComponent } from './pages/users/users-list/users-list.componen
 import { ResponsiveMenuComponent } from './shared/responsive-menu/responsive-menu.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { CountProductsComponent } from './pages/dashboard/count-products/count-products.component';
+import { CountRevenuesComponent } from './pages/dashboard/count-revenues/count-revenues.component';
+import { CountUsersComponent } from './pages/dashboard/count-users/count-users.component';
 
 const UX_MODULE = [
   ButtonModule,
@@ -90,7 +93,10 @@ const UX_MODULE = [
     CommentsListComponent,
     PostsListComponent,
     PostsFormComponent,
-    CountOrdersComponent
+    CountOrdersComponent,
+    CountProductsComponent,
+    CountRevenuesComponent,
+    CountUsersComponent
   ],
   imports: [
     BrowserModule,

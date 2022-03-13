@@ -3,15 +3,16 @@ import { OrdersService } from '@frontend/orders';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'admin-count-orders',
-  templateUrl: './count-orders.component.html',
+  selector: 'admin-count-revenues',
+  templateUrl: './count-revenues.component.html',
   styles: [
   ]
 })
-export class CountOrdersComponent implements OnInit, OnDestroy {
+
+export class CountRevenuesComponent implements OnInit, OnDestroy {
   chartData: any;
   inputDate = new Date();
-  arrOrders = [];
+  arrRevenues = [];
   endsubs$: Subject<void> = new Subject();
 
   constructor(
@@ -19,8 +20,8 @@ export class CountOrdersComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this._getOrders();
-    this._renderChart(this.arrOrders);
+    this._getRevenues();
+    this._renderChart(this.arrRevenues);
   }
 
   ngOnDestroy() {
@@ -28,44 +29,44 @@ export class CountOrdersComponent implements OnInit, OnDestroy {
     this.endsubs$.complete();
   }
 
-  private _renderChart(arrOrders) {
+  private _renderChart(arrRevenues) {
     this.chartData = {
       labels: ['Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu', 'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Môt', 'Tháng Mười Hai'],
       datasets: [
         {
           label: 'Số đơn hàng',
-          backgroundColor: '#42A5F5',
-          data: arrOrders
+          backgroundColor: '#FFA726',
+          data: arrRevenues
         }
       ]
     };
   }
 
-  private _getOrders() {
+  private _getRevenues() {
     this.ordersService
       .getOrders()
       .pipe(takeUntil(this.endsubs$))
       .subscribe(orders => {
-        const arrOrders = [];
+        const arrRevenues = [];
         const year = this.inputDate.getFullYear()
         for (let i = 1; i < 13; i++) {
-          let order = 0;
+          let revenues = 0;
           const month = i.toString().length < 2 ? `0${i}` : `${i}`;
           const date = `${year}-${month}`;
-          orders.forEach(item => {
-            if (item.dateOrdered.includes(date)) {
-              order += 1;
+          orders.forEach(order => {
+            if (order.dateOrdered.includes(date)) {
+              revenues += +order.totalPrice;
             }
           })
-          arrOrders[i - 1] = order;
+          arrRevenues[i - 1] = revenues;
         }
-        this.arrOrders = arrOrders;
-        this._renderChart(this.arrOrders);
+        this.arrRevenues = arrRevenues;
+        this._renderChart(this.arrRevenues);
       })
   }
 
   onYearChange(value) {
     this.inputDate = value;
-    this._getOrders();
+    this._getRevenues();
   }
 }

@@ -8,7 +8,10 @@ const validateMongodbId = require('../helpers/validateMongodbID');
 const fetchOrdersCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
-      const orderList = await Order.find().populate('user', 'name').sort({ 'dateOrdered': -1 });
+      const orderList = await Order.find()
+        .populate('user', 'name')
+        .populate('orderItems')
+        .sort({ 'dateOrdered': -1 });
 
       if (!orderList) return res.status(500).json({ success: false });
 

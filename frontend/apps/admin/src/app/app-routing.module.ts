@@ -5,6 +5,9 @@ import { CategoriesFormComponent } from './pages/categories/categories-form/cate
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
 import { CommentsListComponent } from './pages/comments/comments-list/comments-list.component';
 import { CountOrdersComponent } from './pages/dashboard/count-orders/count-orders.component';
+import { CountProductsComponent } from './pages/dashboard/count-products/count-products.component';
+import { CountRevenuesComponent } from './pages/dashboard/count-revenues/count-revenues.component';
+import { CountUsersComponent } from './pages/dashboard/count-users/count-users.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
@@ -33,6 +36,18 @@ const routes: Routes = [
       {
         path: 'dashboard/count-orders',
         component: CountOrdersComponent
+      },
+      {
+        path: 'dashboard/count-products',
+        component: CountProductsComponent
+      },
+      {
+        path: 'dashboard/count-users',
+        component: CountUsersComponent
+      },
+      {
+        path: 'dashboard/count-revenues',
+        component: CountRevenuesComponent
       },
       {
         path: 'categories',
