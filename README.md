@@ -1,6 +1,7 @@
 # Dango Shop
 
-Dango Shop is a store selling accessories and gifts.
+Dango Shop is a store selling accessories and gifts.\
+Conditions: npm, nodejs, yarn
 
 ## Backend
 
@@ -8,7 +9,7 @@ Step 1:
 
 ```bash
 cd backend/
-npm install
+yarn
 ```
 
 Step 2:
@@ -30,7 +31,7 @@ SECRET_KEY = ...
 Step 4:
 
 ```bash
-npm run start
+yarn run start
 ```
 
 ## Frontend
@@ -39,17 +40,17 @@ Step 1:
 
 ```bash
 cd frontend/
-npm install
-npm install @angular/cli -g
-npm install nx -g
+yarn
+yarn global add @angular/cli 
+yarn global add nx 
 ```
 
 Step 2:
 
 ```bash
-npm run start
+admin: nx serve admin
 or
-nx serve
+admin: nx serve
 ```
 
 ## Contributing
