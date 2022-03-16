@@ -117,6 +117,13 @@
     </div>
     <div class="col-4">
       <orders-order-summary></orders-order-summary>
+      <p-selectButton
+        styleClass="mt-2 flex"
+        [options]="paymentOptions"
+        [(ngModel)]="paymentValue"
+        optionLabel="name"
+        optionValue="value"
+      ></p-selectButton>
       <div class="checkout-button">
         <p-button label="Đặt hàng" (onClick)="placeOrder()"></p-button>
       </div>

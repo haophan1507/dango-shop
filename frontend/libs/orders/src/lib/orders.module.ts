@@ -9,6 +9,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { InputTextModule } from 'primeng/inputtext';
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { CartIconComponent } from './components/cart-icon/cart-icon.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
     InputTextModule,
     InputMaskModule,
     DropdownModule,
+    SelectButtonModule,
     FormsModule,
     ReactiveFormsModule
   ],

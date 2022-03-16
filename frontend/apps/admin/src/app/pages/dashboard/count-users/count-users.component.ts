@@ -82,7 +82,7 @@ export class CountUsersComponent implements OnInit, OnDestroy {
           }
         })
         this.customersBuy = arrCustomerBuy.length;
-        this._renderCustomers(this.customersBuy, this.customers + this.admins - this.customersBuy)
+        this._renderCustomers(this.customersBuy, this.customers - this.customersBuy)
       })
   }
 

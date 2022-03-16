@@ -76,6 +76,7 @@ const createOrderCtrl = expressAsyncHandler(
         country: req?.body?.country,
         phone: req?.body?.phone,
         status: req?.body?.status,
+        payment: req?.body?.payment,
         totalPrice: totalPrice,
         user: req?.body?.user,
       });

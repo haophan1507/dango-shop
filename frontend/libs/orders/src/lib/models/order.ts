@@ -10,6 +10,7 @@ export class Order {
   country?: string;
   phone?: string;
   status?: number;
+  payment?: number;
   totalPrice?: string;
   user?: any;
   dateOrdered?: string;

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Order, OrdersService, ORDER_STATUS } from '@frontend/orders';
+import { Order, OrdersService, ORDER_STATUS, TYPE_PAYMENT } from '@frontend/orders';
 import { MessageService } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -14,6 +14,7 @@ export class OrdersDetailComponent implements OnInit, OnDestroy {
   order: Order;
   orderStatuses = [];
   selectedStatus: any;
+  type_payment = TYPE_PAYMENT;
   endsubs$: Subject<void> = new Subject();
 
   constructor(

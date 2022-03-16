@@ -21,6 +21,11 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   orderItems: OrderItem[] = [];
   userId: string;
   isSubmitted = false;
+  paymentOptions = [
+    { name: 'Chuyển khoản', value: 0 },
+    { name: 'Thanh toán COD', value: 1 },
+  ];
+  paymentValue: number;
   endsubs$: Subject<void> = new Subject();
 
   constructor(
@@ -36,6 +41,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
     this._autoFillUserData();
     this._getCartItems();
     this._getCountries();
+    this.paymentValue = 0;
   }
 
   ngOnDestroy() {
@@ -58,11 +64,17 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       country: this.checkoutForm.country.value,
       phone: this.checkoutForm.phone.value,
       status: 0,
+      payment: this.paymentValue,
       user: this.userId,
       dateOrdered: `${Date.now()}`
     };
 
     this.ordersService.cacheOrderData(order);
+
+    if (this.paymentValue === 1 && this.orderItems.length > 0) {
+      this.router.navigate(['/success']);
+      return;
+    }
 
     this.ordersService.createCheckoutSession(this.orderItems).subscribe(error => {
       if (error) {

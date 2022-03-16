@@ -28,6 +28,10 @@
           <h4>Tổng tiền</h4>
           <p>{{ order.totalPrice | currency: 'VND' }}</p>
         </div>
+        <div class="col-4">
+          <h4>Phương thức thanh toán</h4>
+          <p>{{ type_payment[order.payment] }}</p>
+        </div>
       </div>
     </p-fieldset>
     <p-fieldset legend="Loại hàng" styleClass="mb-4" [toggleable]="true">
