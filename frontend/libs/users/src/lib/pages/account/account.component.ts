@@ -14,6 +14,11 @@ export class AccountComponent {
   ) {}
 
   logoutUser() {
+    const intialCart = {
+      items: []
+    };
+    const intialCartJson = JSON.stringify(intialCart);
+    localStorage.setItem("cart", intialCartJson);
     this.authService.logout();
   }
 }

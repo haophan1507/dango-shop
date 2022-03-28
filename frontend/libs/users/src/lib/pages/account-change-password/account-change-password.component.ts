@@ -21,9 +21,9 @@ export class AccountChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      password: ['', Validators.required],
-      newPassword: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]]
     }, {
       validator: this.ConfirmedValidator('newPassword', 'confirmPassword')
     })
