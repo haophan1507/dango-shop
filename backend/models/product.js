@@ -26,6 +26,7 @@ const productSchema = mongoose.Schema({
   },
   price: {
     type: Number,
+    require: true,
     default: 0
   },
   category: {
@@ -42,10 +43,12 @@ const productSchema = mongoose.Schema({
   rating: {
     type: Number,
     default: 0,
+    min: 0
   },
   numReviews: {
     type: Number,
     default: 0,
+    min: 0
   },
   isFeatured: {
     type: Boolean,
@@ -64,6 +67,5 @@ productSchema.virtual('id').get(function () {
 productSchema.set('toJSON', {
   virtuals: true,
 });
-
 
 exports.Product = mongoose.model('Product', productSchema);

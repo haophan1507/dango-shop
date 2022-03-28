@@ -41,6 +41,8 @@ const fetchUserCtrl = expressAsyncHandler(
 const registerUserCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
+      if (req?.body?.password.length < 6) return res.status(500).send('Password needs to be more than 6 characters');
+
       const userExist = await User.findOne({ email: req?.body?.email });
       if (userExist) return res.status(400).send('User already exists');
 

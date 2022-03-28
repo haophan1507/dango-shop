@@ -36,7 +36,6 @@ export class AccountInfoComponent implements OnInit {
       name: this.userForm.name.value,
       email: this.userForm.email.value,
       phone: this.userForm.phone.value,
-      isAdmin: this.userForm.isAdmin.value,
       street: this.userForm.street.value,
       apartment: this.userForm.apartment.value,
       zip: this.userForm.zip.value,
@@ -71,7 +70,6 @@ export class AccountInfoComponent implements OnInit {
           this.userForm.name.setValue(user.name);
           this.userForm.email.setValue(user.email);
           this.userForm.phone.setValue(user.phone);
-          this.userForm.isAdmin.setValue(user.isAdmin);
           this.userForm.street.setValue(user.street);
           this.userForm.apartment.setValue(user.apartment);
           this.userForm.zip.setValue(user.zip);
@@ -84,10 +82,8 @@ export class AccountInfoComponent implements OnInit {
   private _initUserForm() {
     this.form = this.formBuilder.group({
       name: ['', Validators.required],
-      password: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
-      isAdmin: [false],
       street: [''],
       apartment: [''],
       zip: [''],

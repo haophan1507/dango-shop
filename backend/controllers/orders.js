@@ -219,6 +219,23 @@ const fetchUserOrderCtrl = expressAsyncHandler(
   }
 );
 
+const fetchOrdersExceptFailedCtrl = expressAsyncHandler(
+  async (req, res) => {
+    try {
+      const orderList = await Order.find({ "status": { $nin: ["0", "4"] } })
+        .populate('user', 'name')
+        .populate('orderItems')
+        .sort({ 'dateOrdered': -1 });
+
+      if (!orderList) return res.status(500).json({ success: false });
+
+      return res.send(orderList);
+    } catch (err) {
+      return res.status(500).json({ success: false, error: err.message });
+    };
+  }
+);
+
 module.exports = {
   fetchOrdersCtrl,
   fetchOrderCtrl,
@@ -228,5 +245,6 @@ module.exports = {
   fetchTotalSalesCtrl,
   fetchCountOrderCtrl,
   fetchUserOrderCtrl,
-  createCheckoutCtrl
+  createCheckoutCtrl,
+  fetchOrdersExceptFailedCtrl
 };

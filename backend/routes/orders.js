@@ -10,7 +10,8 @@ const {
   fetchTotalSalesCtrl,
   fetchCountOrderCtrl,
   fetchUserOrderCtrl,
-  createCheckoutCtrl
+  createCheckoutCtrl,
+  fetchOrdersExceptFailedCtrl
 } = require('../controllers/orders');
 
 router.get(`/`, fetchOrdersCtrl);
@@ -30,5 +31,7 @@ router.get('/get/totalsales', fetchTotalSalesCtrl);
 router.get(`/get/count`, fetchCountOrderCtrl);
 
 router.get(`/get/userorders/:userid`, authenticateJWT, fetchUserOrderCtrl);
+
+router.get(`/get/orders-except-failed`, fetchOrdersExceptFailedCtrl);
 
 module.exports = router;

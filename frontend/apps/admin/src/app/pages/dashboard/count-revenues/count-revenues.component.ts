@@ -34,7 +34,7 @@ export class CountRevenuesComponent implements OnInit, OnDestroy {
       labels: ['Tháng Một', 'Tháng Hai', 'Tháng Ba', 'Tháng Tư', 'Tháng Năm', 'Tháng Sáu', 'Tháng Bảy', 'Tháng Tám', 'Tháng Chín', 'Tháng Mười', 'Tháng Mười Môt', 'Tháng Mười Hai'],
       datasets: [
         {
-          label: 'Số đơn hàng',
+          label: 'Tổng doanh thu',
           backgroundColor: '#FFA726',
           data: arrRevenues
         }

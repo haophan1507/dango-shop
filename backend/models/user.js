@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
+console.log(validator);
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -8,18 +10,28 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    validate: [validator.isEmail, 'invalid email']
   },
   passwordHash: {
     type: String,
-    required: true,
+    required: true
   },
   phone: {
     type: String,
     required: true,
+    validate: {
+      validator: (value) => {
+        if (value === "") {
+          return true;
+        }
+        return validator.isMobilePhone(value, "vi-VN");
+      },
+      message: "{VALUE} is not valid"
+    }
   },
   isAdmin: {
     type: Boolean,
-    default: false,
+    default: false
   },
   street: {
     type: String,

@@ -41,8 +41,8 @@ Step 1:
 ```bash
 cd frontend/
 yarn
-yarn global add @angular/cli 
-yarn global add nx 
+yarn global add @angular/cli
+yarn global add nx
 ```
 
 Step 2:
@@ -50,7 +50,7 @@ Step 2:
 ```bash
 admin: nx serve admin
 or
-admin: nx serve
+shop: nx serve
 ```
 
 ## Contributing
