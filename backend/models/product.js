@@ -15,6 +15,7 @@ const productSchema = mongoose.Schema({
   },
   image: {
     type: String,
+    required: true,
     default: ''
   },
   images: [{
@@ -26,8 +27,8 @@ const productSchema = mongoose.Schema({
   },
   price: {
     type: Number,
-    require: true,
-    default: 0
+    required: true,
+    min: 0
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -37,8 +38,7 @@ const productSchema = mongoose.Schema({
   countInStock: {
     type: Number,
     required: true,
-    min: 0,
-    max: 255
+    min: 0
   },
   rating: {
     type: Number,

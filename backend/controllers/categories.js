@@ -37,6 +37,9 @@ const fetchCategoryCtrl = expressAsyncHandler(
 const updateCategoryCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
+      if (!req.body?.name || !req.body?.icon)
+        return res.status(500).json({ message: 'Name or icon empty' });
+
       const { id } = req.params;
       validateMongodbId(id);
       const category = await Category.findByIdAndUpdate(

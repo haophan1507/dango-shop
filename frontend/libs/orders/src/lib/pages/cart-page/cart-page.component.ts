@@ -32,24 +32,28 @@ export class CartPageComponent implements OnInit, OnDestroy {
   }
 
   private _getCartDetails() {
-    this.cartService.cart$
-      .pipe(takeUntil(this.endsubs$))
-      .subscribe(carts => {
-        this.cartItemsDetailed = [];
-        this.cartCount = carts?.items?.length ?? 0;
-        carts.items?.forEach(cart => {
-          this.ordersService
-            .getProduct(cart.productId)
-            .pipe(take(1))
-            .subscribe(product => {
-              this.cartItemsDetailed.push({
-                product: product,
-                quantity: cart.quantity
-              })
-              this.cartItemsDetailed.sort(this.compare);
-            })
+    const carts = this.cartService.getCart();
+    this.cartItemsDetailed = [];
+    this.cartCount = carts?.items?.length ?? 0;
+    carts.items.map(item => {
+      this.ordersService
+        .getProduct(item.productId)
+        .pipe(take(1))
+        .subscribe(product => {
+          if (item.quantity > product.countInStock) {
+            this.cartService.setCartItem({
+              productId: item.productId,
+              quantity: product.countInStock
+            }, true)
+            item.quantity = product.countInStock
+          }
+          this.cartItemsDetailed.push({
+            product: product,
+            quantity: item.quantity
+          })
+          this.cartItemsDetailed.sort(this.compare);
         })
-      })
+    })
   }
 
   private compare(a, b) {
