@@ -48,6 +48,9 @@ const createOrderCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
       const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) => {
+        if (orderItem.quantity <= 0)
+          return res.status(500).json({ success: false, message: "Quantity needs to be greater than 0" })
+
         let newOrderItem = new OrderItem({
           quantity: orderItem.quantity,
           product: orderItem.product

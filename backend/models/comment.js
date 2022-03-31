@@ -4,25 +4,27 @@ const commentSchema = mongoose.Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Product",
-    require: true
+    required: true
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    require: true
+    required: true
   },
   orderItem: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "OrderItem",
-    require: true
+    required: true
   },
   description: {
     type: String,
-    require: true
+    required: true
   },
   rating: {
     type: Number,
-    default: 0,
+    required: true,
+    min: 1,
+    max: 5
   },
   dateCreated: {
     type: Date,

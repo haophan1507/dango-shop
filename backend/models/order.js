@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
 const orderSchema = mongoose.Schema({
   orderItems: [{
@@ -28,6 +29,15 @@ const orderSchema = mongoose.Schema({
   phone: {
     type: String,
     required: true,
+    validate: {
+      validator: (value) => {
+        if (value === "") {
+          return true;
+        }
+        return validator.isMobilePhone(value, "vi-VN");
+      },
+      message: "{VALUE} is not valid"
+    }
   },
   status: {
     type: Number,

@@ -42,6 +42,10 @@ const updateCommentCtrl = expressAsyncHandler(
       const { id } = req.params;
       validateMongodbId(id);
 
+      if (req.body?.rating <= 0 || req.body?.rating > 5 || !req.body?.rating.toString().trim() || !req.body?.description.trim()) {
+        return res.status(500).json({ message: 'Please re-enter' });
+      }
+
       if (req?.user.userId !== id && !req?.user.isAdmin)
         return res.status(400).json({ message: 'The user cannot access' });
 

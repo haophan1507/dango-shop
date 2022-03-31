@@ -37,7 +37,7 @@ const fetchCategoryCtrl = expressAsyncHandler(
 const updateCategoryCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
-      if (!req.body?.name || !req.body?.icon)
+      if (!req.body?.name.trim() || !req.body?.icon.trim())
         return res.status(500).json({ message: 'Name or icon empty' });
 
       const { id } = req.params;
@@ -64,6 +64,9 @@ const updateCategoryCtrl = expressAsyncHandler(
 
 const createCategoryCtrl = expressAsyncHandler(
   async (req, res) => {
+    const categoryExist = await Category.findOne({ name: req.body?.name });
+    if (categoryExist) return res.status(500).send('Category already exists');
+
     try {
       let category = new Category({
         name: req.body?.name,

@@ -45,6 +45,9 @@ const createProductCtrl = expressAsyncHandler(
       const category = await Category.findById(req?.body?.category);
       if (!category) return res.status(400).send('Invalid category');
 
+      const productExist = await Product.findOne({ name: req?.body?.name });
+      if (productExist) return res.status(500).send('Product already exists');
+
       const file = req?.file;
       if (!file) return res.status(400).send('No image in the request');
       const fileName = req?.file?.filename;
@@ -85,6 +88,14 @@ const updateProductCtrl = expressAsyncHandler(
       validateMongodbId(id);
       const product = await Product.findById(id);
       if (!product) return res.status(400).send('Invalid Product!');
+
+      if (req?.body?.countInStock < 0 || req?.body?.rating < 0 || req?.body?.numReviews < 0 || req?.body?.price < 0) {
+        return res.status(500).json({ success: false, message: "Need is a positive number" })
+      }
+
+      if (!req?.body?.name.trim() || !req?.body?.brand.trim() || !req?.body?.price.toString().trim()) {
+        return res.status(500).json({ success: false, message: "Please re-enter" })
+      }
 
       const file = req.file;
       let imagepath;

@@ -42,6 +42,10 @@ const updatePostCtrl = expressAsyncHandler(
       const post = await Post.findById(id);
       if (!post) return res.status(400).send('Invalid Post!');
 
+      if (!req.body?.title.trim() || !req.body?.description.trim()) {
+        return res.status(500).json({ message: 'Please re-enter' });
+      }
+
       const file = req?.file;
       let imagepath;
 
