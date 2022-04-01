@@ -56,10 +56,10 @@ export class RegisterComponent implements OnInit {
 
   private _initregisterForm() {
     this.registerFormGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.pattern(`^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$`)]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      name: ['', [Validators.required, Validators.minLength(6)]],
-      phone: ['', [Validators.required, Validators.minLength(10)]],
+      name: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
+      phone: ['', [Validators.required, Validators.pattern(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g)]],
     });
   }
 

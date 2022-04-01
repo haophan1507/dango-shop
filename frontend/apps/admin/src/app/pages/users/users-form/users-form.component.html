@@ -78,9 +78,9 @@
             <div class="p-field col-4">
               <label for="color">Số điện thoại</label><br />
               <p-inputMask
-                mask="(999) 999-9999"
+                mask="9999999999"
                 formControlName="phone"
-                placeholder="(999) 999-9999"
+                [autoClear]="false"
               ></p-inputMask>
               <small
                 *ngIf="userForm.phone.invalid && isSubmitted"

@@ -27,7 +27,7 @@
                 ><span *ngIf="registerForm.email.errors.required"
                   >Vui lòng nhập Email</span
                 >
-                <span *ngIf="registerForm.email.errors.email"
+                <span *ngIf="registerForm.email.errors.pattern"
                   >Email không đúng định dạng</span
                 >
               </small>
@@ -47,7 +47,11 @@
               <small
                 *ngIf="registerForm.name.invalid && isSubmitted"
                 class="p-error"
-                ><span *ngIf="registerForm.name.errors.required"
+                ><span
+                  *ngIf="
+                    registerForm.name.errors.required &&
+                    registerForm.name.errors.pattern
+                  "
                   >Vui lòng nhập họ tên</span
                 >
                 <span *ngIf="registerForm.name.errors.minlength"
@@ -61,9 +65,9 @@
                   ><i class="pi pi-phone"></i
                 ></span>
                 <p-inputMask
-                  mask="(999) 999-9999"
+                  mask="9999999999"
                   formControlName="phone"
-                  placeholder="(+84)"
+                  [autoClear]="false"
                 ></p-inputMask>
               </div>
               <small
@@ -72,7 +76,7 @@
                 ><span *ngIf="registerForm.phone.errors.required"
                   >Vui lòng nhập số điện thoại</span
                 >
-                <span *ngIf="registerForm.phone.errors.minlength"
+                <span *ngIf="registerForm.phone.errors.pattern"
                   >Só điện thoại không đúng định dạng</span
                 >
               </small>
@@ -107,7 +111,9 @@
                 styleClass="full-btn"
                 (onClick)="onSubmit()"
               ></p-button>
-              <a (click)="login()" class="block mt-2 text-right cursor-pointer"
+            </div>
+            <div class="col-5 col-offset-7">
+              <a (click)="login()" class="block text-right cursor-pointer"
                 >Đăng Nhập</a
               >
             </div>
