@@ -11,7 +11,16 @@
               <small
                 *ngIf="userForm.name.invalid && isSubmitted"
                 class="p-error"
-                >Vui lòng nhập tên người dùng
+              >
+                <span *ngIf="userForm.name.errors.required"
+                  >Vui lòng nhập tên người dùng</span
+                >
+                <span *ngIf="userForm.name.errors.minlength"
+                  >Họ tên phải lớn hơn 6 ký tự</span
+                >
+                <span *ngIf="userForm.name.errors.pattern">
+                  Vui lòng nhập tên người dùng
+                </span>
               </small>
             </div>
 
@@ -30,7 +39,7 @@
                 <span *ngIf="userForm.email.errors.required"
                   >Vui lòng nhập email</span
                 >
-                <span *ngIf="userForm.email.errors.email"
+                <span *ngIf="userForm.email.errors.pattern"
                   >Email không đúng định dạng</span
                 >
               </small>

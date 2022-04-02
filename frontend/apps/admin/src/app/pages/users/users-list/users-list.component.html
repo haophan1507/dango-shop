@@ -61,6 +61,7 @@
                   (click)="deleteUser(user.id)"
                 ></p-button>
                 <p-button
+                  *ngIf="user.isAdmin"
                   styleClass="p-button-success"
                   icon="pi pi-pencil"
                   (click)="updateUser(user.id)"
@@ -77,4 +78,6 @@
   [style]="{ width: '50vw' }"
   [baseZIndex]="10000"
   rejectButtonStyleClass="p-button-text"
+  acceptLabel="Xác nhận"
+  rejectLabel="Hủy"
 ></p-confirmDialog>
