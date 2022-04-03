@@ -42,4 +42,4 @@ mongoose.connect(process.env.CONNECTION_STRING)
     console.log(err);
   });
 
-app.listen(3000);
+module.exports = app;

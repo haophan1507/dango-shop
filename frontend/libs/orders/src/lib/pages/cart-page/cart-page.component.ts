@@ -80,6 +80,7 @@ export class CartPageComponent implements OnInit, OnDestroy {
 
   deleteCartItem(cartItemId: string) {
     this.cartService.deleteCartItem(cartItemId);
+    this._getCartDetails();
   }
 
   backtoShop() {
