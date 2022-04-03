@@ -82,7 +82,7 @@ export class AccountInfoComponent implements OnInit {
   private _initUserForm() {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]],
-      email: ['', [Validators.required, Validators.pattern(`^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$`)]],
+      email: ['', [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)]],
       phone: ['', Validators.required],
       street: [''],
       apartment: [''],

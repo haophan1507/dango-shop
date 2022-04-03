@@ -12,5 +12,15 @@
     .full-btn {
       width: 100%;
     }
+
+    .directional {
+      display: block;
+      text-align: right;
+      cursor: pointer;
+    }
+
+    .directional:hover {
+      text-decoration: underline;
+    }
   }
 }

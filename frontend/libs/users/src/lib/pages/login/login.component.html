@@ -64,9 +64,7 @@
               ></p-button>
             </div>
             <div class="col-4 col-offset-8">
-              <a (click)="register()" class="block text-right cursor-pointer"
-                >Đăng Ký</a
-              >
+              <a (click)="register()" class="directional">Đăng Ký</a>
             </div>
             <div class="col-12" *ngIf="isSubmitted && authError">
               <small class="p-error">{{ authMessage }}</small>

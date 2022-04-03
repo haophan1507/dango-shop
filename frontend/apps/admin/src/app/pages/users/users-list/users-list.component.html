@@ -56,6 +56,7 @@
               <td>{{ getCountryName(user.country) }}</td>
               <td>
                 <p-button
+                  *ngIf="user.isAdmin"
                   styleClass="p-button-danger mr-2"
                   icon="pi pi-trash"
                   (click)="deleteUser(user.id)"

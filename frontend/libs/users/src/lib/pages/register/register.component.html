@@ -68,6 +68,7 @@
                   mask="9999999999"
                   formControlName="phone"
                   [autoClear]="false"
+                  placeholder="Số điện thoại"
                 ></p-inputMask>
               </div>
               <small
@@ -113,9 +114,7 @@
               ></p-button>
             </div>
             <div class="col-5 col-offset-7">
-              <a (click)="login()" class="block text-right cursor-pointer"
-                >Đăng Nhập</a
-              >
+              <a (click)="login()" class="directional">Đăng Nhập</a>
             </div>
             <div class="col-12" *ngIf="isSubmitted && authError">
               <small class="p-error">{{ authMessage }}</small>
