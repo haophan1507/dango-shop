@@ -38,9 +38,15 @@ export class OrdersDetailComponent implements OnInit, OnDestroy {
       .updateOrder({ status: event.value }, this.order.id)
       .pipe(takeUntil(this.endsubs$))
       .subscribe(() => {
+        this._getOrder();
         this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Trạng thái đã được cập nhật' });
-      }, () => {
-        this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
+      }, (error) => {
+        if (error.status === 500) {
+          this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Sản phẩm đang tạm hết hàng' });
+          this.selectedStatus = 0;
+        } else {
+          this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
+        }
       });
   }
 

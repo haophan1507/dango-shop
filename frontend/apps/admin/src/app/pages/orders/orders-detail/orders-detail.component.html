@@ -17,6 +17,17 @@
         <div class="col-4">
           <h4>Trạng thái</h4>
           <p-dropdown
+            *ngIf="order.status !== 4"
+            [options]="orderStatuses"
+            optionLabel="name"
+            optionValue="id"
+            (onChange)="onStatusChange($event)"
+            [(ngModel)]="selectedStatus"
+            [placeholder]="orderStatuses[order.status]['name']"
+          ></p-dropdown>
+          <p-dropdown
+            *ngIf="order.status === 4"
+            [disabled]="true"
             [options]="orderStatuses"
             optionLabel="name"
             optionValue="id"

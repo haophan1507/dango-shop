@@ -134,6 +134,58 @@ const updateOrderCtrl = expressAsyncHandler(
     try {
       const { id } = req.params;
       validateMongodbId(id);
+
+      const orderFind = await Order.findById(id).populate('orderItems');
+
+      switch (orderFind.status) {
+        case 0:
+          //check status
+          if (+req?.body?.status === 0 || +req?.body?.status === 4) break;
+          //check products in stock
+          const productList = Promise.all(orderFind.orderItems.map(async item => {
+            const product = await Product.findById(item.product)
+            if (product.countInStock >= item.quantity) {
+              return product
+            }
+          }))
+          if ((await productList).includes(undefined)) {
+            return res.status(500).send('Product is temporarily out of stock!');
+          }
+          // update products
+          const productUpdate = Promise.all(orderFind.orderItems.map(async item => {
+            const product = await Product.findById(item.product)
+            await Product.findByIdAndUpdate(
+              product.id,
+              {
+                countInStock: product.countInStock - item.quantity
+              },
+              { new: true }
+            )
+          }))
+          await productUpdate;
+          break;
+        case 1:
+        case 2:
+        case 3:
+          //check status
+          if (+req?.body?.status === 0 || +req?.body?.status === 4) {
+            const productUpdate = Promise.all(orderFind.orderItems.map(async item => {
+              const product = await Product.findById(item.product)
+              await Product.findByIdAndUpdate(
+                product.id,
+                {
+                  countInStock: product.countInStock + item.quantity
+                },
+                { new: true }
+              )
+            }))
+            await productUpdate;
+          };
+          break;
+        default:
+          break;
+      }
+
       const order = await Order.findByIdAndUpdate(
         id,
         {
