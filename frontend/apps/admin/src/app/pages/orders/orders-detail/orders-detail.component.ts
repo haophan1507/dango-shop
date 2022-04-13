@@ -44,7 +44,12 @@ export class OrdersDetailComponent implements OnInit, OnDestroy {
         if (error.status === 500) {
           this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Sản phẩm đang tạm hết hàng' });
           this.selectedStatus = 0;
-        } else {
+        }
+        else if (error.status === 406) {
+          this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Không thể lùi lại trạng thái' });
+          this.selectedStatus = 0;
+        }
+        else {
           this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
         }
       });

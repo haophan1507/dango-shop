@@ -137,6 +137,9 @@ const updateOrderCtrl = expressAsyncHandler(
 
       const orderFind = await Order.findById(id).populate('orderItems');
 
+      console.log(orderFind.status, +req?.body?.status);
+      if (orderFind.status > +req?.body?.status) return res.status(406).send('Do not revert the status!');
+
       switch (orderFind.status) {
         case 0:
           //check status

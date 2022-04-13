@@ -38,14 +38,24 @@ export class OrdersListComponent implements OnInit, OnDestroy {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.ordersService
-          .deleteOrder(orderId)
+          .getOrder(orderId)
           .pipe(takeUntil(this.endsubs$))
-          .subscribe(() => {
-            this._getOrders();
-            this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Đơn hàng đã bị xóa' });
-          }, () => {
-            this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
-          });
+          .subscribe((order) => {
+            if (order.status === 4) {
+              this.ordersService
+                .deleteOrder(orderId)
+                .pipe(takeUntil(this.endsubs$))
+                .subscribe(() => {
+                  this._getOrders();
+                  this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Đơn hàng đã bị xóa' });
+                }, () => {
+                  this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Vui lòng thử lại' });
+                });
+            } else {
+              this.messageService.add({ severity: 'error', summary: 'Thất bại', detail: 'Đơn hàng đang ở trạng thái hoạt động' });
+            }
+
+          })
       }
     });
   }
