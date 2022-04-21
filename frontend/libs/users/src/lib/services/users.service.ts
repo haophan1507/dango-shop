@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Comment } from '../models/comment';
-import { environment } from '@env/environment';
 import * as countriesLib from 'i18n-iso-countries';
 import { UsersFacade } from '../state/users.facade';
 declare const require;
@@ -12,9 +11,9 @@ declare const require;
   providedIn: 'root'
 })
 export class UsersService {
-  apiURLUsers = environment.apiUrl + 'users';
-  apiURLOrders = environment.apiUrl + 'orders';
-  apiURLComments = environment.apiUrl + 'comments';
+  apiURLUsers = 'https://dango-shop.herokuapp.com/api/v1/' + 'users';
+  apiURLOrders = 'https://dango-shop.herokuapp.com/api/v1/' + 'orders';
+  apiURLComments = 'https://dango-shop.herokuapp.com/api/v1/' + 'comments';
 
   constructor(
     private http: HttpClient,

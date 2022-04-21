@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '@env/environment';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { LocalstorageService } from './localstorage.service';
@@ -10,7 +9,7 @@ import { LocalstorageService } from './localstorage.service';
   providedIn: 'root'
 })
 export class AuthService {
-  apiURLUsers = environment.apiUrl + 'users';
+  apiURLUsers = 'https://dango-shop.herokuapp.com/api/v1/' + 'users';
 
   constructor(
     private http: HttpClient,
