@@ -98,6 +98,7 @@ const createOrderCtrl = expressAsyncHandler(
 const createCheckoutCtrl = expressAsyncHandler(
   async (req, res) => {
     try {
+      let origin = req.get('origin');
       const orderItems = req.body;
       if (!orderItems) return res.status(400).send('checkout session cannot be created');
       const lineItems = await Promise.all(
@@ -119,8 +120,8 @@ const createCheckoutCtrl = expressAsyncHandler(
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: 'http://localhost:4200/success',
-        cancel_url: 'http://localhost:4200/error',
+        success_url: `${origin}/success`,
+        cancel_url: `${origin}/error`,
       });
       res.json({ id: session.id })
     } catch (err) {
