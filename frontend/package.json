@@ -9,7 +9,7 @@
     "build": "nx build",
     "test": "nx test",
     "lint": "nx workspace-lint && ng lint",
-    "build-prod-dango-shop": "nx build dango-shop --prod --output-path ../dango-shop --base-href /dango-shop/",
+    "build-prod-dango-shop": "nx build dango-shop --output-path docs --base-href /dango-shop/",
     "build-prod-admin": "nx build admin --prod --output-path ../admin --base-href /admin/"
   },
   "private": true,
