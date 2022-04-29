@@ -4,3 +4,7 @@ nx serve admin
 nx g component pages/home-page --project=dango-shop
 npx nx g @nrwl/workspace:lib ui 
 nx generate @schematics/angular:component --name=slider --project=ui --style=scss --export --prefix=ui --selector=slider
+
+API_URL = /api/v1
+CONNECTION_STRING = mongodb+srv://phanvanhao1507:IsI2jPqgdbmaVqft@cluster0.znqmv.mongodb.net/dangoShop-test?retryWrites=true
+SECRET_KEY = dangoShop 
